@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profil Siswa RPG</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Fredoka', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #FADADD, #A0D8EF);
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #BFA2DB;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .nav button {
+      background: #FADADD;
+      border: none;
+      color: #5A3E70;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .nav button:hover {
+      transform: scale(1.08);
+      background: #F8BBD0;
+      color: white;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #BFA2DB;
+      margin-bottom: 10px;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 16px;
+    }
+
+    .level {
+      padding: 4px 10px;
+      background: #BFA2DB;
+      color: white;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .stat {
+      margin: 15px 0;
+    }
+
+    .bar-bg {
+      background: #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 24px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      color: white;
+      padding-left: 10px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+    }
+
+    .tasks {
+      margin-top: 30px;
+    }
+
+    .task {
+      background: #FFE3EC;
+      padding: 12px;
+      border-left: 5px solid #F8BBD0;
+      margin-bottom: 12px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .info {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Profil Siswa</h1>
+
+  <div class="nav">
+    <button onclick="showPage('profile')">Dashboard</button>
+    <button onclick="showPage('tasks')">Tugas</button>
+    <button onclick="showPage('stats')">Statistik</button>
+    <!-- <button onclick="alert('Sampai jumpa!')">Keluar</button> -->
+  </div>
+
+  <!-- PROFIL -->
+  <div id="profile" class="page-section">
+    <div class="profile-header">
+      <img src="img.jpg" alt="Foto Siswa" class="profile-pic">
+      <h2 id="student-name">Grace Tuju</h2>
+    </div>
+
+    <div class="info"><strong>Usia:</strong> <span id="student-age">13 tahun</span></div>
+    <div class="info"><strong>Level:</strong> <span class="level" id="student-level">? ? ? ? ?</span></div>
+    <div class="info"><strong>Hari Belajar:</strong> <span class="level" id="student-level">Senin</span></div>
+    <div class="info"><strong>Jam Belajar:</strong> <span class="level" id="student-level">??? WITA</span></div>
+  </div>
+
+  <!-- TUGAS -->
+  <div id="tasks" class="page-section hidden">
+    <h2>Tugas dari Guru</h2>
+    <div class="task">Tugas akan diupload segera...</div>
+    <!-- <div class="task">2. Hafalkan lirik lagu daerah dan rekam suaramu</div> -->
+    <!-- <div class="task">3. Tulis cerita pendek tentang persahabatan</div> -->
+  </div>
+
+  <!-- STATISTIK -->
+  <div id="stats" class="page-section hidden">
+    <h2>Statistik Karakter</h2>
+    <div class="stat">
+      <label>Intelegent</label>
+      <div class="bar-bg"><div class="bar-fill" style="width: 0%; background: #BFA2DB;">0%</div></div>
+    </div>
+    <div class="stat">
+      <label>Strength</label>
+      <div class="bar-bg"><div class="bar-fill" style="width: 0%; background: #FADADD;">0%</div></div>
+    </div>
+    <div class="stat">
+      <label>Agility</label>
+      <div class="bar-bg"><div class="bar-fill" style="width: 0%; background: #A0D8EF;">0%</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showPage(pageId) {
+    const pages = document.querySelectorAll('.page-section');
+    pages.forEach(page => page.classList.add('hidden'));
+    document.getElementById(pageId).classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>

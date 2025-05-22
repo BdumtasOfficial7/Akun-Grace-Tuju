@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lirik & Chord Lagu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Chord & Lirik Lagu</h1>
+
+    <input type="text" id="searchInput" placeholder="Cari lagu..." oninput="filterOptions()" onkeydown="handleKey(event)" />
+
+    <select id="songSelect" onchange="selectSong()">
+      <option value="">-- Pilih Lagu --</option>
+      <option value="tanpa">Tiara Andini - Tanpa Cinta</option>
+      <option value="bintang">Nidji - Laskar Pelangi</option>
+      <option value="sampai">Sheila On 7 - Dan</option>
+    </select>
+
+    <pre id="lyricsDisplay">Lirik dan chord akan muncul di sini...</pre>
+
+    <button onclick="downloadPDF()">Download PDF</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Belajar Akor Gitar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Belajar Akor Gitar</h1>
+  <p>Sentuh fret untuk menambahkan titik jari <br>Angka = jari yang dipakai untuk menekan fret <br>S = String atau senar gitar <br>F = Fret gitar <br>F1 = Fret paling kiri dekat kepala gitar</p>
+</header>
+
+<div>
+  <label for="chordSelect">Pilih Akor:</label>
+  <select id="chordSelect">
+    <option value="C">C Mayor</option>
+    <option value="Cm">C minor</option>
+    <option value="CM7">CM7</option>
+    <option value="Cm7">Cm7</option>
+    <option value="Csus4">Csus4</option>
+    <option value="C7sus4">C7sus4</option>
+    <option value="C6">C6</option>
+    <option value="Cm6">Cm6</option>
+    <option value="C7">C7</option>
+    <option value="C9">C9</option>
+    <option value="C11">C11</option>
+    <option value="C13">C13</option>
+    <option value="Cadd9">Cadd9</option>
+    <option value="Cmadd9">Cmadd9</option>
+    <option value="Cm9">Cm9</option>
+    <option value="CM9">CM9</option>
+    <option value="Caug">Caug</option>
+    <option value="Cdim7">Cdim7</option>
+    <option value="C0">C0</option>
+    <option value="C5">C5</option>
+    <option value="Ckresm">C# minor</option>
+    <option value="D">D Mayor</option>
+    <option value="Dm">D minor</option>
+    <option value="DM7">DM7</option>
+    <option value="DdomT">D7</option>
+    <option value="E">E Mayor</option>
+    <option value="Em">E minor</option>
+    <option value="EdomT">E7</option>
+    <option value="F">F Mayor</option>
+    <option value="Fm">F minor</option>
+    <option value="FdomT">F7</option>
+    <option value="Fkresm">F# minor</option>
+    <option value="G">G Mayor</option>
+    <option value="Gm">G minor</option>
+    <option value="GdomT">G7</option>
+    <option value="Gkresm">G# minor</option>
+    <option value="A">A Mayor</option>
+    <option value="Am">A minor</option>
+    <option value="AdomT">A7</option>
+    <option value="Akres">A# Mayor</option>
+    <option value="B">B Mayor</option>
+    <option value="Bm">B minor</option>
+    <option value="BdomT">B7</option>
+  </select>
+
+  <label for="startFret">Fret Awal:</label>
+  <input type="number" id="startFret" value="1" min="1" max="18" style="width: 60px;"/>
+
+  <button onclick="playChord()">Mainkan Akor</button>
+  <button onclick="resetDots()">Reset</button>
+</div>
+
+<div id="fretLabels"></div>
+<div id="fretboard"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guitar Tuner</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #232526, #414345);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    .note-box {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .note {
+      background: #333;
+      border-radius: 12px;
+      padding: 20px;
+      width: 100px;
+      transition: 0.3s;
+    }
+    .note.tuned {
+      background: #4CAF50;
+    }
+    .note.off {
+      background: #E53935;
+    }
+    .note h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .note p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+    @media(max-width: 600px) {
+      .note { width: 80px; padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple Guitar Tuner</h1>
+  <p>Izinkan mikrofon dan petik senar gitar kamu.</p>
+  <div class="note-box" id="noteBox"></div>
+
+  <script>
+    const notes = [
+      { name: "E", freq: 82.41 },
+      { name: "A", freq: 110.00 },
+      { name: "D", freq: 146.83 },
+      { name: "G", freq: 196.00 },
+      { name: "B", freq: 246.94 },
+      { name: "e", freq: 329.63 },
+    ];
+
+    const noteBox = document.getElementById("noteBox");
+    notes.forEach(n => {
+      const div = document.createElement("div");
+      div.className = "note";
+      div.innerHTML = `<h2>${n.name}</h2><p>---</p>`;
+      noteBox.appendChild(div);
+      n.element = div;
+    });
+
+    function autoTune() {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+        const source = context.createMediaStreamSource(stream);
+        const analyser = context.createAnalyser();
+        analyser.fftSize = 2048;
+        source.connect(analyser);
+        const buffer = new Float32Array(analyser.fftSize);
+
+        function detect() {
+          analyser.getFloatTimeDomainData(buffer);
+          const freq = detectPitch(buffer, context.sampleRate);
+          if (freq) {
+            notes.forEach(n => {
+              const diff = Math.abs(n.freq - freq);
+              if (diff < 2) {
+                n.element.className = "note tuned";
+                n.element.querySelector("p").textContent = freq.toFixed(1) + " Hz";
+              } else {
+                n.element.className = "note off";
+                n.element.querySelector("p").textContent = freq.toFixed(1) + " Hz";
+              }
+            });
+          }
+          requestAnimationFrame(detect);
+        }
+        detect();
+      }).catch(err => {
+        alert("Mikrofon tidak bisa diakses: " + err.message);
+      });
+    }
+
+    function detectPitch(data, sampleRate) {
+      const SIZE = data.length;
+      let bestOffset = -1;
+      let bestCorr = 0;
+      for (let offset = 50; offset < 1000; offset++) {
+        let corr = 0;
+        for (let i = 0; i < SIZE - offset; i++) {
+          corr += data[i] * data[i + offset];
+        }
+        if (corr > bestCorr) {
+          bestCorr = corr;
+          bestOffset = offset;
+        }
+      }
+      if (bestCorr > 0.01) {
+        return sampleRate / bestOffset;
+      }
+      return null;
+    }
+
+    autoTune();
+  </script>
+</body>
+</html>

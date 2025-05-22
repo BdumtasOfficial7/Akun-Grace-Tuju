@@ -1,0 +1,88 @@
+body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      text-align: center;
+    }
+
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+    }
+    header p {
+        text-align:left;
+    }
+
+    select, button, input[type="number"] {
+      padding: 8px;
+      margin: 8px 4px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #fretLabels {
+      display: grid;
+      grid-template-columns: 40px repeat(6, 1fr);
+      max-width: 100%;
+      margin: 10px auto 0;
+      font-weight: bold;
+    }
+
+    #fretLabels div {
+      padding: 5px;
+      text-align: center;
+    }
+
+    #fretboard {
+      display: grid;
+      grid-template-columns: 40px repeat(6, 1fr);
+      grid-template-rows: repeat(6, 50px);
+      max-width: 100%;
+      margin: 0 auto;
+      gap: 2px;
+      background: #444;
+    }
+
+    .cell {
+      background: #deb887;
+      border-left: 1px solid #999;
+      border-bottom: 2px solid #333;
+      position: relative;
+    }
+
+    .stringLabel {
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .dot {
+      width: 24px;
+      height: 24px;
+      background-color: #007bff;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @media (max-width: 600px) {
+      #fretboard {
+        grid-template-rows: repeat(6, 35px);
+      }
+      .dot {
+        width: 18px;
+        height: 18px;
+        font-size: 0.7em;
+      }
+    }

@@ -1,4 +1,28 @@
 const lyrics = {
+      hatikupercaya: `Edward Chen - Hatiku Percaya
+[Intro]
+F G Am F C G C
+
+[Verse]
+C       Em     Am          G
+Saat ku tak melihat jalan-Mu
+F        Em     Dm         G
+Saat ku tak mengerti rencana-Mu
+Am       Em    C            F
+Namun tetap kupegang janji-Mu
+Dm       Em    F     G    C
+Pengharapanku hanya pada-Mu
+
+[Chorus]
+        F   G  C
+Hatiku per-ca-ya
+        F   G  C
+hatiku per-ca-ya
+        F   E  Am
+hatiku per-ca-ya
+   F       C   G  C
+s'lalu ku per-ca-ya`,
+
       tanpa: `Tiara Andini - Tanpa Cinta
 [Intro]
 C G Am F

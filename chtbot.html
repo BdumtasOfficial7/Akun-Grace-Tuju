@@ -111,7 +111,7 @@
 </head>
 <body>
   <div class="chat-container">
-    <div class="chat-box" id="chatBox" style="white-space: pre-line;">Alpha Version</div>
+    <div class="chat-box" id="chatBox" style="white-space: pre-line;">Alpha Version 1.1<br>Tanya: "Apa yang bisa kamu lakukan?"</div>
     <div class="input-area">
       <input type="text" id="userInput" placeholder="Tulis pertanyaan...">
       <button class="send-btn" onclick="sendMessage()">➤</button>
@@ -126,7 +126,9 @@
     // Database pertanyaan & jawaban
     const knowledgeBase = [
       { q: ["halo", "hai"], a: [{ type: "text", content: "Halo! Senang bisa membantu kamu belajar 😊" }] },
-      { q: ["da capo", "d.c."], a: [{ type: "text", content: "Da Capo (D.C.) artinya 'kembali ke awal'. Contoh: D.C. al Fine = kembali ke awal lalu berhenti di Fine." }] },
+      { q: ["baik", "ok","okay","oke"], a: [{ type: "text", content: "Ada yang bisa saya bantu?" }] },
+      { q: ["apa yang bisa kamu lakukan"], a: [{ type: "text", content: "Untuk saat ini saya bisa menjawab semua pertanyaan tentang istilah-istilah yang digunakan dalam musik.\n\nKamu bisa mengetik:\n- 'Apa yang dimaksud dengan .... (istilah)?'\n- 'Jelaskan tentang .... (istilah)'\n- '.... (istilah) adalah...'\nuntuk mengetahui istilah yang ingin kamu pelajari." }, { type: "text", content: "Saya masih dalam tahap pengembangan, dan nanti akan lebih canggih lagi..." }] },
+      { q: ["da capo", "d.c.", "d.c", "dc"], a: [{ type: "text", content: "Da Capo (D.C.) artinya 'kembali ke awal'. Contoh: D.C. al Fine = kembali ke awal lalu berhenti di Fine." }] },
       { q: ["dal segno", "d.s."], a: [{ type: "text", content: "Dal Segno (D.S.) artinya kembali ke tanda segno. Contoh: D.S. al Fine = kembali ke segno lalu berhenti di Fine." }] },
       { q: ["accelerando", "accel.", "accel"], a: [
         { type: "text", content: "Accelerando atau accel adalah istilah dari bahasa Itali dalam musik yang berarti secara bertahap menjadi lebih cepat, atau semakin lama semakin cepat." }
@@ -142,7 +144,7 @@
       { q: ["cantabile"], a: [{ type: "text", content: "Cantabile artinya 'seperti bernyanyi'. Ini menunjuk pada gaya bermain, bukan tempo. Lagu harus dimainkan dengan ekspresif, seolah-olah suara manusia yang bernyanyi." }] },
       { q: ["crescendo", "cresc.", "cresc"], a: [{ type: "text", content: "Crescendo berarti semakin lama semakin keras. Volume suara bertambah secara bertahap." }] },
       { q: ["decrescendo", "decresc.", "decresc"], a: [{ type: "text", content: "Decrescendo berarti semakin lama semakin lembut. Volume suara menurun secara perlahan." }] },
-      { q: ["diminuendo", "dim."], a: [{ type: "text", content: "Diminuendo (dim.) artinya semakin lama semakin lembut, sama seperti decrescendo." }] },
+      { q: ["diminuendo", "dim.", "dimin."], a: [{ type: "text", content: "Diminuendo (dim.) artinya semakin lama semakin lembut, sama seperti decrescendo." }] },
       { q: ["fine"], a: [{ type: "text", content: "Fine artinya 'Akhir' atau tanda selesai." }] },
       { q: ["forte","f"], a: [{ type: "text", content: "Forte (f) artinya 'keras' atau 'nyaring'." }] },
       { q: ["fortissimo", "ff"], a: [{ type: "text", content: "Fortissimo (ff) artinya 'sangat keras' atau 'sangat nyaring'." }] },
@@ -159,11 +161,11 @@
       { q: ["poco"], a: [{ type: "text", content: "Poco artinya 'sedikit'." }] },
       { q: ["rallentando", "rall"], a: [{ type: "text", content: "Rallentando artinya secara bertahap semakin lambat." }] },
       { q: ["ritardando", "ritard."], a: [{ type: "text", content: "Ritardando artinya secara bertahap semakin lambat." }] },
-      { q: ["ritenuto", "riten."], a: [{ type: "text", content: "Ritenuto artinya menahan tempo (tiba-tiba lebih lambat)." }] },
+      { q: ["ritenuto", "riten.", "riten"], a: [{ type: "text", content: "Ritenuto artinya menahan tempo (tiba-tiba lebih lambat)." }] },
       { q: ["rit."], a: [{ type: "text", content: "istilah 'Rit.' bisa berarti 'ritardando' atau 'ritenuto'. Mana yang ingin kamu ketahui?" }] },
       { q: ["staccato", "stacc."], a: [{ type: "text", content: "Staccato artinya nada dimainkan terputus-putus, singkat." }] },
       { q: ["tempo"], a: [{ type: "text", content: "Tempo artinya kecepatan musik. Contoh: a tempo = kembali ke tempo semula." }] },
-      { q: ["8va"], a: [{ type: "text", content: "8va berarti ottava atau octave. \nArtinya kamu harus memainkan nada-nada itu 1 (satu) oktave lebih tinggi atau lebih rendah." }] },
+      { q: ["8va", "8"], a: [{ type: "text", content: "8va berarti ottava atau octave. \nArtinya kamu harus memainkan nada-nada itu 1 (satu) oktave lebih tinggi atau lebih rendah." }] },
       { q: ["titik", "dot"], a: [{ type: "text", content: "titik (.) disebut dot. biasanya diletakan di atas, di bawah, dan di samping not." },
         { type: "image", content: "" },
       ] },
@@ -202,11 +204,60 @@
       { q: ["presto"], a: [{ type: "text", content: "Presto artinya cepat. Lebih cepat dari allegro." }] },
       { q: ["senza"], a: [{ type: "text", content: "Senza artinya 'tanpa'." }] },
       { q: ["sf", "sfz", "sforzando", "sforzato"], a: [{ type: "text", content: "Sforzando atau sforzato biasa disingkat 'sf' atau 'sfz' artinya ditekankan, dengan aksen kuat." }] },
-      { q: ["andantino"], a: [{ type: "text", content: "" }] },
-      { q: ["andantino"], a: [{ type: "text", content: "" }] },
-      { q: ["andantino"], a: [{ type: "text", content: "" }] },
-      { q: ["andantino"], a: [{ type: "text", content: "" }] },
-      { q: ["andantino"], a: [{ type: "text", content: "" }] },
+      { q: ["simile", "sim."], a: [{ type: "text", content: "Simile atau disingkat 'sim.' adalah kata dalam bahasa Itali yang artinya 'dengan cara yang sama'." }] },
+      { q: ["sostenuto"], a: [{ type: "text", content: "Sostenuto adalah kata dari bahasa Itali yang artinya 'sustain'. Maksudnya adalah, nada dijaga agar tetap panjang dan menyatu." }] },
+      { q: ["tenuto"], a: [{ type: "text", content: "Tenuto berasal dari bahasa Itali yang berarti 'ditahan' atau 'dijaga panjangnya'." }, { type: "text", content: "Dalam musik tanda tenuto ( - ) artinya not tersebut harus:\n\n1. Ditekan atau dimainkan dengan tidak dipersingkat.\n\n2. Sedikit lebih kuat atau diberi penekanan lembut dibantingkan not di sekitarnya." }] },
+      { q: ["troppo"], a: [{ type: "text", content: "Troppo berasal dari bahasa Itali yang berarti 'terlalu' atau 'secara berlebihan'." }, { type: "text", content: "Dalam musik, troppo tidak berdiri sendiri. Biasanya troppo dipasangkan dengan istilah yang lain.\nContohnya:\n\n- Allegro ma non troppo => Cepat, tapi tidak terlalu cepat\n\n- Adagio ma non troppo => Lambat, tapi tidak terlalu lambat\n\n- Presto troppo => Terlalu cepat" }] },
+      { q: ["vivace", "vivo"], a: [{ type: "text", content: "Vivace atau vivo berasal dari bahasa Itali yang artinya berhubungan dengan kehidupan, semangat, dan keceriaan." }, { type: "text", content: "Dalam musik, Vivace artinya: dimainkan dengan tempo cepat dan ceria, penuh energi dan bersemangat.\n\nTemponya sekitar 140-160 bpm." }] },
+      { q: ["adagietto"], a: [{ type: "text", content: "Adagietto berasal dari bahasa Itali yang artinya tempo lambat tapi tidak terlalu lambat, atau lebih ringan dan mengalir daripada Adagio.\n\nBiasanya digunakan untuk bagian musik yang lembut, tenang, dan ekspresif, tetapi tidak terlalu berat atau sedih.\n\nTemponya sekitar 70-80 bpm." }] },
+      { q: ["ad libitum", "ad lib."], a: [{ type: "text", content: "Ad libitum atau biasa disingkat ad lib., adalah istilah yang berasal dari bahasa Latin yang artinya 'sesuai kehendak' atau 'sebebasnya'.\n\nBerarti, pemain bebas menentukan cara, tempo, atau ekspresi saat memainkan bagian tertentu, dan tidak harus mengikuti ketukan atau notasi secara kaku." }, { type: "text", content: "Ada 3 konteks umum penggunaannya:\n\n1. Tempo bebas => Pemain boleh mempercepat atau memperlambat sesuka hati untuk menambah ekspresi.\n\n2. Improvisasi => Pemain boleh menambah atau mengubah melodi.\n\n3. Instrumen opsional => Artinya bagian instrumen tersebut boleh dimainkan atau tidak." }] },
+      { q: ["agitato"], a: [{ type: "text", content: "Agitato berasal dari bahasa Itali dan sering muncul dalam musik klasik untuk menunjukkan emosi dan karakter permainan." }, { type: "text", content: "Secara harfia 'agitato' berarti 'gelisah,' 'bergejolak,' atau 'tergesa-gesa.'\n\nArtinya, nada dimainkan dengan penuh ketegangan dan dinamis. Biasanya disertai tempo agak cepat atau berdenyut tidak tenang." }] },
+      { q: ["alla breve"], a: [{ type: "text", content: "Alla breve berasal dari bahasa Itali yang berarti ;'menggunakan jenis not minim (half note) sebagai satu ketukan.'\n\nArtinya musik dimainkan dalam birama 2/2 - jadi setiap ketukan utama = not setengah (minim)." }] },
+      { q: ["amore"], a: [{ type: "text", content: "Amore berasal dari bahasa Itali yang berarti 'Cinta.'\n\nDalam musik 'amore' digunakan untuk menunjukkan bahwa bagian musik itu harus dimainkan dengan penuh perasaan, kasih dan kelembutan." }, { type: "text", content: "Biasanya muncul sebagai tambahan pada petunjuk ekspresi.\nContohnya:\n\n- 'Con amore' => Dengan cinta\n\n- Dolce e con amore => Mainkan dengan suara lembut dan hangat." }] },
+      { q: ["anima"], a: [{ type: "text", content: "Anima berasal dari bahasa Itali dan Latin yang secara harfiah berarti 'jiwa', 'semangat', atau 'roh.'" }, { type: "text", content: "Dalam musik, anima berarti: 'mainkan dengan penuh semangat.'\nArtinya, musiknya tidak boleh datar atau kaku, tapi pemain harus mengekspresikan emosi dengan hidup dan berenergi, seolah nada-nada itu punya roh di dalamnya." }] },
+      { q: ["animato"], a: [{ type: "text", content: "Animato berasal dari bahasa Itali yang artinya: dihidupkan, bersemangat, dan penuh kehidupan.\n\nKegunaan dalam musik menunjukkan gaya atau tempo permainan.\n\nMakna praktisnya: Tingkatkan tempo dan energi - buat musik terasa bergerak dan berdenyut dengan semangat." }] },
+      { q: ["ben"], a: [{ type: "text", content: "Ben berasal dari bahasa Itali, yang artinya 'dengan baik' atau 'dengan jelas'.\n\nBiasanya kata ini tidak berdiri sendiri, tapi digunakan bersama istilah lain.\nContohnya:\n\n- Ben legato => dengan legato yang baik dan halus.\n\n- ben sostenuto => dengan penahanan nada yang baik atau mantap." }] },
+      { q: ["brio"], a: [{ type: "text", content: "Brio berasal dari bahasa Itali yang artinya semangat, energi, atau gairah.\n\nNuansanya lebih ke energi yang berapi-api dan hidup.\n\nKesannya seperti permainan yang 'menyala', kuat, dan penuh gairah." }] },
+      { q: ["comodo"], a: [{ type: "text", content: "Istilah comodo atau dibaca ko-mo-do, berasal dari bahasa Itali yang berarti 'nyaman' atau 'santai'.\n\n'Comodo' berarti musik harus dimainkan dalam tempo atau gaya yang nyaman dan tidak terburu-buru, terasa alami bagi pemain maupun pendengar." }] },
+      { q: ["deciso"], a: [{ type: "text", content: "Deciso berasal dari bahasa Itali yang berarti 'tegas', 'mantap', atau 'penuh keyakinan'.\n\nDalam musik, Deciso menunjukkan bahwa bagian musik tersebut harus dimainkan:\n\n- dengan ketegasan\n- penuh keyakinan\n- nada dan ritmenya harus jelas\n- tenpa keraguan atau lembek" }] },
+      { q: ["delicato"], a: [{ type: "text", content: "Delicato berasal dari bahasa Itali yang berarti 'halus', 'lembut', atau penuh kepekaan'.\n\nDalam musik, delicato menunjukkan bahwa bagian musik harus dimainkan:\n- dengan kelembutan dan kehalusan\n- dengan sentuhan ringan dan penuh rasa\n- tanpa tekanan berat atau keras" }] },
+      { q: ["energico"], a: [{ type: "text", content: "Energico berasal dari bahasa Itali yang berarti: 'dengan energi', 'bertenaga', atau 'kuat dan penuh semangat'.\n\nJika tertulis energico, berarti musik harus dimainkan:\n- dengan kekuatan dan semangat penuh\n- tegas dan mantap dalam ritme dan dinamika\n- memberi kesan energi yang mengalir dan berdaya dorong" }] },
+      { q: ["forza"], a: [{ type: "text", content: "Forza dari bahasa Itali artinya 'kekuatan' atau 'tenaga'.\n\nDalam musik, istilah ini menunjukkan bahwa bagian tersebut harus dimainkan dengan kuat, penuh daya, dan bertenaga." }] },
+      { q: ["largamente"], a: [{ type: "text", content: "Largamente berasal dari bahasa Itali, dari kata 'largo', yang berarti lebar.\n\nDalam konteks musik, ketika tertulis 'largamente', maka pemain diharapkan memainkan musik:\n- dengan tempo agak lambat atau tenang\n- nada panjang dan penuh ekspresi\n- dengan perasaan agung, luas, dan tidak terburu-buru" }] },
+      { q: ["leggiero"], a: [{ type: "text", content: "" }] },
+      { q: ["marcato", "marc."], a: [{ type: "text", content: "" }] },
+      { q: ["marziale"], a: [{ type: "text", content: "" }] },
+      { q: ["mesto"], a: [{ type: "text", content: "" }] },
+      { q: ["pesante"], a: [{ type: "text", content: "" }] },
+      { q: ["prima", "primo"], a: [{ type: "text", content: "" }] },
+      { q: ["risoluto"], a: [{ type: "text", content: "" }] },
+      { q: ["ritmico"], a: [{ type: "text", content: "" }] },
+      { q: ["rubato"], a: [{ type: "text", content: "" }] },
+      { q: ["scherzando", "scherzoso"], a: [{ type: "text", content: "" }] },
+      { q: ["seconda", "secondo"], a: [{ type: "text", content: "" }] },
+      { q: ["semplice"], a: [{ type: "text", content: "" }] },
+      { q: ["sempre"], a: [{ type: "text", content: "" }] },
+      { q: ["stringendo"], a: [{ type: "text", content: "" }] },
+      { q: ["subito"], a: [{ type: "text", content: "" }] },
+      { q: ["tanto"], a: [{ type: "text", content: "" }] },
+      { q: ["tranquillo"], a: [{ type: "text", content: "" }] },
+      { q: ["triste", "tristamente"], a: [{ type: "text", content: "" }] },
+      { q: ["volta"], a: [{ type: "text", content: "" }] },
+      { q: ["perdendosi"], a: [{ type: "text", content: "Perdendosi adalah" }] },
+      { q: ["mormorando"], a: [{ type: "text", content: "Mormorando adalah" }] },
+      { q: ["un"], a: [{ type: "text", content: "" }] },
+      { q: ["dolente"], a: [{ type: "text", content: "" }] },
+      { q: ["lusingando"], a: [{ type: "text", content: "" }] },
+      { q: ["smorz.", "smorz"], a: [{ type: "text", content: "" }] },
+      { q: ["quasi"], a: [{ type: "text", content: "" }] },
+      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
+      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
+      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
+      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
+      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
+      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
+      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
+      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
     ];
 
       // Tambahkan pesan ke layar
@@ -318,7 +369,7 @@
       for (let keyword of item.q) {
         let sim = similarity(text, keyword);
         let regex = new RegExp("\\b" + keyword.toLowerCase() + "\\b", "i");
-        if (regex.test(text) || sim >= 0.9) {
+        if (regex.test(text) || sim >= 0.8) {
           matches.push({ keyword, answers: item.a });
         }
         if (sim > bestMatch.score) {

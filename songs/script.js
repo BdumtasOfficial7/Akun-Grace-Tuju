@@ -23,6 +23,41 @@ hatiku per-ca-ya
    F       C   G  C
 s'lalu ku per-ca-ya`,
 
+      oholynight: `Mariah Carey - O Holy Night
+[Intro]
+C C C C (arpeggio)
+
+[Verse]
+C       C
+O Holy Night
+      F                 C   C
+The stars are brightly shining
+          C             G              C
+It is the night of our dear Saviour's birth
+C             C        F             C  C
+Long lay the world in sin and error pining
+            Em            Dm            Am
+'Til He appeared and the soul felt its worth
+
+[Bridge]
+     G       G        C             C
+A thrill of hope the weary world rejoices
+     G       G       C                C
+For yonder breaks a new and glorious morn
+
+[Refrain]
+Am 2x          Em 2x   
+Fall on your knees
+
+   Dm 2x             Am 2x
+O hear the angels' voices
+
+   C G     F 2x    C G                   C 2x
+O night divine, o night when Christ was born
+
+   G 2x    C F     C G              C
+O night divine, o night, o night divine`,
+
       tanpa: `Tiara Andini - Tanpa Cinta
 [Intro]
 C G Am F

@@ -1,126 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatbot Belajar Visual</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .chat-container {
-      width: 100%;
-      max-width: 420px;
-      height: 90vh;
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .chat-box {
-      flex: 1;
-      padding: 15px;
-      overflow-y: auto;
-    }
-
-    .message {
-      margin: 8px 0;
-      padding: 10px 14px;
-      border-radius: 15px;
-      max-width: 80%;
-      line-height: 1.4;
-      word-wrap: break-word;
-    }
-
-    .user {
-      background: #0078ff;
-      color: white;
-      align-self: flex-end;
-      border-bottom-right-radius: 0;
-    }
-
-    .bot {
-      background: #e5e7eb;
-      color: #333;
-      align-self: flex-start;
-      border-bottom-left-radius: 0;
-    }
-
-    .message img {
-      max-width: 200px;
-      border-radius: 10px;
-      margin-top: 5px;
-      display: block;
-    }
-
-    .message a {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 8px 12px;
-      background: #0078ff;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    .input-area {
-      display: flex;
-      padding: 10px;
-      border-top: 1px solid #ddd;
-      background: #fafafa;
-    }
-
-    .input-area input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      outline: none;
-    }
-
-    .input-area button {
-      margin-left: 8px;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      font-size: 18px;
-      color: white;
-    }
-
-    .send-btn {
-      background: #0078ff;
-    }
-
-    .voice-btn {
-      background: #ff5c5c;
-    }
-  </style>
-</head>
-<body>
-  <div class="chat-container">
-    <div class="chat-box" id="chatBox" style="white-space: pre-line;">Alpha Version 1.1<br>Tanya: "Apa yang bisa kamu lakukan?"</div>
-    <div class="input-area">
-      <input type="text" id="userInput" placeholder="Tulis pertanyaan...">
-      <button class="send-btn" onclick="sendMessage()">➤</button>
-      <button class="voice-btn" onclick="startVoice()">🎤</button>
-    </div>
-  </div>
-
-  <script>
-    const chatBox = document.getElementById("chatBox");
+const chatBox = document.getElementById("chatBox");
     const userInput = document.getElementById("userInput");
 
     // Database pertanyaan & jawaban
@@ -144,7 +22,7 @@
       { q: ["cantabile"], a: [{ type: "text", content: "Cantabile artinya 'seperti bernyanyi'. Ini menunjuk pada gaya bermain, bukan tempo. Lagu harus dimainkan dengan ekspresif, seolah-olah suara manusia yang bernyanyi." }] },
       { q: ["crescendo", "cresc.", "cresc"], a: [{ type: "text", content: "Crescendo berarti semakin lama semakin keras. Volume suara bertambah secara bertahap." }] },
       { q: ["decrescendo", "decresc.", "decresc"], a: [{ type: "text", content: "Decrescendo berarti semakin lama semakin lembut. Volume suara menurun secara perlahan." }] },
-      { q: ["diminuendo", "dim.", "dimin."], a: [{ type: "text", content: "Diminuendo (dim.) artinya semakin lama semakin lembut, sama seperti decrescendo." }] },
+      { q: ["diminuendo", "dim", "dimin"], a: [{ type: "text", content: "Diminuendo (dim.) artinya semakin lama semakin lembut, sama seperti decrescendo." }] },
       { q: ["fine"], a: [{ type: "text", content: "Fine artinya 'Akhir' atau tanda selesai." }] },
       { q: ["forte","f"], a: [{ type: "text", content: "Forte (f) artinya 'keras' atau 'nyaring'." }] },
       { q: ["fortissimo", "ff"], a: [{ type: "text", content: "Fortissimo (ff) artinya 'sangat keras' atau 'sangat nyaring'." }] },
@@ -185,7 +63,7 @@
       { q: ["andantino"], a: [{ type: "text", content: "Andantino artinya sedikit lebih cepat dari andante." }] },
       { q: ["assai"], a: [{ type: "text", content: "Assai artinya sangat. Contohnya: 'allegro assai' = sangat cepat." }] },
       { q: ["con", "col"], a: [{ type: "text", content: "Con atau col artinya 'with' dalam bahasa inggris." }] },
-      { q: ["dolce"], a: [{ type: "text", content: "'Dolce' berasal dari bahasa Itali yang berarti 'manis', 'lembut', atau 'halus'.\n\nIni merupakan petunjuk ekspresi untuk pemain musik.\n\nKetika tertulis 'dolce' di partitur, maka:\n1. Nada harus dimainkan dengan lembut dan penuh perasaan.\n2. Sentuhan jari ringan, tidak menghentak.\n3. Musik harus terasa emosional, menimbulkan kesan lembut, penuh kasih, atau romantis." }] },
+      { q: ["dolce", "dol.", "dol"], a: [{ type: "text", content: "'Dolce' berasal dari bahasa Itali yang berarti 'manis', 'lembut', atau 'halus'.\n\nIni merupakan petunjuk ekspresi untuk pemain musik.\n\nKetika tertulis 'dolce' di partitur, maka:\n1. Nada harus dimainkan dengan lembut dan penuh perasaan.\n2. Sentuhan jari ringan, tidak menghentak.\n3. Musik harus terasa emosional, menimbulkan kesan lembut, penuh kasih, atau romantis." }] },
       { q: ["e", "ed"], a: [{ type: "text", content: "'e' atau 'ed' dalam bahasa Itali berarti: 'and' (bahasa inggris)." }] },
       { q: ["espressivo", "espress.", "espr."], a: [{ type: "text", content: "espressivo atau 'espress.' atau 'espr.' adalah istilah dalam bahasa Itali yang artinya ekspresif." }] },
       { q: ["fortepiano", "fp"], a: [{ type: "text", content: "Fortepiano atau 'fp' adalah istilah dari bahasa Itali yang artinya: keras, lalu segera lembut.\n\nIni merupakan instruksi untuk memainkan nada 'keras' pada awalnya, kemudian langsung setelah itu menjadi 'lembut'.\n\nPenerapannya berbeda-beda, tergantung alat musik apa yang digunakan.\n\n- Pada piano: tekan tuts dengan keras sekali, lalu segera kurangi tekanan sehingga suara cepat menjadi lembut.\n\n- Pada biola: gesek awal dengan tenaga kuat, lalu segera kendurkan agar bunyinya lembut." }] },
@@ -224,40 +102,78 @@
       { q: ["energico"], a: [{ type: "text", content: "Energico berasal dari bahasa Itali yang berarti: 'dengan energi', 'bertenaga', atau 'kuat dan penuh semangat'.\n\nJika tertulis energico, berarti musik harus dimainkan:\n- dengan kekuatan dan semangat penuh\n- tegas dan mantap dalam ritme dan dinamika\n- memberi kesan energi yang mengalir dan berdaya dorong" }] },
       { q: ["forza"], a: [{ type: "text", content: "Forza dari bahasa Itali artinya 'kekuatan' atau 'tenaga'.\n\nDalam musik, istilah ini menunjukkan bahwa bagian tersebut harus dimainkan dengan kuat, penuh daya, dan bertenaga." }] },
       { q: ["largamente"], a: [{ type: "text", content: "Largamente berasal dari bahasa Itali, dari kata 'largo', yang berarti lebar.\n\nDalam konteks musik, ketika tertulis 'largamente', maka pemain diharapkan memainkan musik:\n- dengan tempo agak lambat atau tenang\n- nada panjang dan penuh ekspresi\n- dengan perasaan agung, luas, dan tidak terburu-buru" }] },
-      { q: ["leggiero"], a: [{ type: "text", content: "" }] },
-      { q: ["marcato", "marc."], a: [{ type: "text", content: "" }] },
-      { q: ["marziale"], a: [{ type: "text", content: "" }] },
-      { q: ["mesto"], a: [{ type: "text", content: "" }] },
-      { q: ["pesante"], a: [{ type: "text", content: "" }] },
-      { q: ["prima", "primo"], a: [{ type: "text", content: "" }] },
-      { q: ["risoluto"], a: [{ type: "text", content: "" }] },
-      { q: ["ritmico"], a: [{ type: "text", content: "" }] },
-      { q: ["rubato"], a: [{ type: "text", content: "" }] },
-      { q: ["scherzando", "scherzoso"], a: [{ type: "text", content: "" }] },
-      { q: ["seconda", "secondo"], a: [{ type: "text", content: "" }] },
-      { q: ["semplice"], a: [{ type: "text", content: "" }] },
-      { q: ["sempre"], a: [{ type: "text", content: "" }] },
-      { q: ["stringendo"], a: [{ type: "text", content: "" }] },
-      { q: ["subito"], a: [{ type: "text", content: "" }] },
-      { q: ["tanto"], a: [{ type: "text", content: "" }] },
-      { q: ["tranquillo"], a: [{ type: "text", content: "" }] },
-      { q: ["triste", "tristamente"], a: [{ type: "text", content: "" }] },
-      { q: ["volta"], a: [{ type: "text", content: "" }] },
-      { q: ["perdendosi"], a: [{ type: "text", content: "Perdendosi adalah" }] },
-      { q: ["mormorando"], a: [{ type: "text", content: "Mormorando adalah" }] },
-      { q: ["un"], a: [{ type: "text", content: "" }] },
-      { q: ["dolente"], a: [{ type: "text", content: "" }] },
-      { q: ["lusingando"], a: [{ type: "text", content: "" }] },
-      { q: ["smorz.", "smorz"], a: [{ type: "text", content: "" }] },
-      { q: ["quasi"], a: [{ type: "text", content: "" }] },
-      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
-      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
-      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
-      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
-      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
-      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
-      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
-      { q: ["adagietto"], a: [{ type: "text", content: "" }] },
+      { q: ["leggiero"], a: [{ type: "text", content: "Leggiero (dibaca: led-je-ro) berasal dari bahasa Itali yang berarti: 'ringan', 'lembut', atau 'lincah'.\n\nJika kamu melihat tanda leggiero pada partitur, maka kamu harus memainkan nada-nada dengan ringan, lembut, dan tanpa tekanan berat. \n\nNada-nadanya harus mengalir cepat dan halus, seperti melayang di udara." }] },
+      { q: ["marcato", "marc."], a: [{ type: "text", content: "Marcato berasal dari bahasa Itali yang berarti 'ditandai' atau 'ditekankan'.\n\nJika kamu melihat tanda 'marcato', biasanya tertulis 'marcato' atau disingkat dengan simbol ^ di atas not, maka: mainkan setiap nada dengan penekanan yang kuat dan jelas, sehingga terdengar tegas, jelas, dan menonjol dari lainnya." }] },
+      { q: ["marziale"], a: [{ type: "text", content: "Marziale berasal dari bahasa Itali yang berarti 'militer' atau 'bersifat seperti perang'.\n\nJika tertulis marziale, berarti musik harus dimainkan: dengan gaya militer, yaitu tegas, gagah, berirama seperti barisan tentara.\n\nRitme harus kuat, stabil, dan bersemangat, seolah menggambarakan langkah-langkah prajurit yang sedang berbaris." }] },
+      { q: ["mesto"], a: [{ type: "text", content: "Mesto berasalah dari bahasa Itali yang berarti 'sedih', 'muram', atau 'melankolis'.\n\nBiasanya digunakan sebagai petunjuk ekspresi pada lagu yang ingin disampaikan dengan perasan duka atau kesedihan yang mendalam." }] },
+      { q: ["pesante"], a: [{ type: "text", content: "Pesante adalah istilah dari bahasa Itali yang berarti 'berat', kokoh', atau 'dengan tekanan yang kuat'.\n\nBukan berarti dimainkan keras (forte), tapi berat dan tegas, seperti langkah yang mantap dan penuh tenaga." }] },
+      { q: ["prima", "primo"], a: [{ type: "text", content: "Prima dan Primo sama-sama berasal dari bahasa Itali yang berarti 'pertama', tapi penggunaannya berbeda, tergantung konteks dan jenis katanya.\n\nPrimo (maskulin), berarti 'yang pertama'. Biasanya digunakan untuk alat musik atau bagian pertama dalam duet." }, { type: "text", content: "Contohnya:\n\n- Primo dalam duet piano => pemain pertama. Biasanya memainkan bagian atas).\n\n- Piano primo = pemain piano pertama (melodi utama)." }, { type: "text", content: "Prima (feminim) berarti juga 'yang pertama' tapi bentuk feminim. Biasanya digunakan dalam konteks instruksi atau pengulangan.\n\nContoh:\n\n- Da capo al prima volta = kembali ke awal hingga bagian 'pertama kali'." }] },
+      { q: ["risoluto"], a: [{ type: "text", content: "Risoluto berasal dari bahasa Itali yang berarti tegas, mantap, atau penuh keyakinan." }, { type: "text", content: "Jika kamu melihat kata 'risoluto' pada partitur, berarti musik harus dimainkan dengan:\n\n- tekad yang kuat\n- nada yang jelas dan tidak ragu-ragu\n- irama stabil dan penuh keyakinan" }] },
+      { q: ["ritmico"], a: [{ type: "text", content: "Ritmico adalah istilah musik dari bahasa Itali yang berarti berirama atau dengan ritme yang kuat dan jelas." }, { type: "text", content: "Jika kamu melihat ritmico di partitur, itu artinya musik harus dimainkan dengan:\n\n- Tekanan kuat pada irama\n- Pola ritme yang teratur dan terasa jelas\n- Energi dan semangat yang mengikuti ketukan" }, { type: "text", content: "Cara bermain:\n\n- Pada piano atau gitar => jaga ketukan agar terasa stabil dan 'groovy'\n-Pada drum atau perkusi => tekankan ritme utama agar pendengar bisa merasakan beat-nya\n- Pada vokal atau paduan suara => nyanyikan dengan artikulasi ritmis yang jelas" }] },
+      { q: ["rubato"], a: [{ type: "text", content: "Rubato berasal dari bahasa Itali yang berarti 'mencuri waktu', 'atau 'memainkan tempo dengan bebas'." },{ type: "text", content: "Rubato menunjukkan bahwa pemain tidak mengikuti tempo secara kaku, tetapi sedikit memperlambat atau mempercepat bagian tertentu agar terasa lebih ekspresif dan hidup." }] },
+      { q: ["scherzando", "scherzoso"], a: [{ type: "text", content: "Scherzando dan Scherzoso sama-sama berasal dari bahasa Itali dari kata dasar 'scherzo' yang berarti 'lelucon', 'bercanda' atau 'gembira'.\n\nKeduanya memberi petunjuk bahwa musik harus dimainkan dengan ringan, ceria, dan penuh permainan." }, { type: "text", content: "Cara bermain:\n\n- Gunakan nada ringan, artikulasi jelas, dan dinamika lincah.\n- Hindari tekanan berat, buat musik terdengar riang dan bersemangat." }] },
+      { q: ["seconda", "secondo"], a: [{ type: "text", content: "Seconda berasal dari bahasa Itali yang artinya 'kedua'.\n\nSeconda digunakan untuk menunjukkan bagian atau pemain kedua, biasanya dalam duet, ansambel, atau instruksi pengulangan.\n\nContohnya:\n- Primo = pertama\n- Seconda = kedua" }] },
+      { q: ["semplice"], a: [{ type: "text", content: "Semplice dari bahasa Itali yang berarti 'sederhana' atau 'dengan sederhana'.\n\nKalau tertulis 'semplice' pada partitur, artinya lagu atau bagian itu harus dimainkan dengan sederhana, polos, tidak berlebihan, dan alami, minim ornament." }] },
+      { q: ["sempre"], a: [{ type: "text", content: "Sempre dari bahasa Itali artinya 'selalu', 'terus-menerus', atau 'senantiasa'.\n\nDalam musik, ini digunakan untuk memberi tahu pemain agar terus mempertahankan instruksi tertentu sepenjang bagian, sampai ada tanda baru yang mengubahnya." }, { type: "text", content: "Contoh:\n\n- sempre piano (sempre f) => selalu lembut. Jangan tiba-tiba naik volume kecuali ada tanda lain.\n- sempre legato => mainkan terus menerus dengan legato, jangan terputus." }] },
+      { q: ["stringendo"], a: [{ type: "text", content: "Stringendo berasal dari bahasa Itali yang berarti 'menekan' atau 'menyempitkan'.\n\nDalam musik, ini dipakai sebagai petunjuk ekspresi untuk: semakin cepat sedikit demi sedikit (accelerating), dan biasanya dengan nuansa makin tegang/intens." }, { type: "text", content: "Stringendo sering muncul menjelang klimaks atau saat transisi menuju bagian baru.\n\nBisa juga disertai peningkatan dinamika (lebih keras) agar berefek dramatis." }] },
+      { q: ["subito"], a: [{ type: "text", content: "Subito berasal dari bahasa Itali yang berarti 'tiba-tiba'.\n\nDalam musik, 'subito' adalah petunjuk agar pemain melakukan perubahan drastis dan langsung." }, { type: "text", content: "Contoh:\n\n-subito piano (sub. p) => langsung lembut, meskipun bar sebelumnya keras.\n- subito staccato => mendadak staccato." }] },
+      { q: ["tanto"], a: [{ type: "text", content: "Tanto berasal dari bahasa Itali yang artinya 'sangat', 'begitu', 'banyak', 'amat'.\n\nDalam konteks musik, tanto dipakai untuk menekankan ukuran/derajat sesuatu (tempo, dinamika, ekspresi)." }, { type: "text", content: "Biasanya 'tanto' tidak berdiri sendiri, melainkan digabung dengan istilah lain.\n\nContohnya:\n\nAllegro ma non tanto = cepat, tetapi tidak begitu cepat." }, { type: "text", content: "Tanto sering dipakai dalam bentuk negatif. Contohnya:\n\nnon tanto = tidak terlalu" }] },
+      { q: ["tranquillo"], a: [{ type: "text", content: "Tranquillo berasal dari bahasa Itali yang artinya 'tenang', 'damai', 'hening', 'penuh ketenangan'.\n\nDalam musik, ini adalah tanda ekspresi supaya bagian dimainkan dengan rasa tenang, tidak gelisah, lembut, dan stabil." }, { type: "text", content: "Cara Pemakaian:\n\n- Andante tranquillo => tempo sedang dengan suasana tenang.\n- Poco piu tranquillo => sedikit lebih tenang.\n- Tranquillo, ma espressivo => tenang, tapi tetap ekspresif.\n- Sempre tranquillo => tetap tenang sepanjang bagian." }] },
+      { q: ["triste", "tristamente"], a: [{ type: "text", content: "Triste atau tristamente berasal dari bahasa Itali yang artinya 'sedih' atau 'mainkan dengan sedih'." }] },
+      { q: ["volta"], a: [{ type: "text", content: "Volta dari bahasa Itali yang artinya 'waktu' atau 'giliran'.\n\nDi partitur, volta digunakan untuk menunjukkan bagian ulangan - yaitu bagian musik yang dimainkan pada giliran pertama, kedua, dan seterusnya." }, { type: "text", content: "Volta digunakan bersama angka (1,2,3,dst) untuk menandai bagian berbeda yang dimainkan pada setiap pengulangan." }] },
+      { q: ["perdendosi"], a: [{ type: "text", content: "Perdendosi adalah istilah musik dari bahasa Itali yang artinya 'menghilang secara perlahan' atau 'lenyap sedikit demi sedikit'." }, { type: "text", content: "Ketika tertulis perdendosi di partitur, pemain diminta untuk:\n\n- Memperlambat tempo secara bertahap,\n- Menurunkan volume (dinamika) secara perlahan,\n- Buat musik semakin lama semakin lembut dan akhirnya seolah menghilang." }] },
+      { q: ["mormorando"], a: [{ type: "text", content: "Mormorando adalah istilah dalam bahasa Itali yang berarti 'berbisik' atau 'bergumam pelan'." }, { type: "text", content: "Jika ada istilah 'mormorando' di partitur, maka musik harus dimainkan:\n\n- dengan sangat lembut,\n- halus seperti bisikan atau gumaman,\n- dengan nuansa misterius, tenang, dan lembut." }] },
+      { q: ["un"], a: [{ type: "text", content: "Un adalah istilah musik yang berasal dari bahasa Itali yang artinya 'satu' atau 'sebuah' (a/one).\n\n'un' hampir tidak pernah berdiri sendiri - biasanya digunakan bersama kat lain untuk memberikan nuansa 'sedikit', 'satu', atau 'sebuah hal tertentu'." }, { type: "text", content: "Un berfungsi sebagai artikel tak tentu seperti kata 'a' atau 'one' dalam bahasa Inggris.\n\nContohnya:\n\n- un poco = sedikit\n- un poco meno forte = sedikit kurang keras" }] },
+      { q: ["dolente"], a: [{ type: "text", content: "Dolente berasal dari bahasa Itali yang berarti 'sedih', 'duka', atau 'penuh penderitaan'." }, { type: "text", content: "Ketika tertulis dolente di partitur, maka musik harus dimainkan dengan:\n\n- ekspresi kesedihan yang mendalam,\n- nada lembut dan penuh perasaan,\n- seolah-olah pemain merasakan duka atau kehilangan" }] },
+      { q: ["lusingando"], a: [{ type: "text", content: "Lusingando berasal dari bahasa Itali yang artinya 'memikat', 'menyenangkan', 'memuji dengan lembut'." }, { type: "text", content: "Ketika tertulis lusingando di partitur, maka musik harus dimainkan dengan:\n\n- nada lembut dan menawan\n- gaya yang halus, ekspresif, dan menggoda pendengar\n- seolah-olah musiknya sedang membujuk atau merayu dengan keindahan suara" }] },
+      { q: ["smorz.", "smorz"], a: [{ type: "text", content: "Smorz. merupakan singkatan dari istilah musik Itali 'smorzando', yang artinya 'memadam', 'memudarkan', atau 'menghilang perlahan'." }, { type: "text", content: "Jika tertulis smorz. atau smorzando di partitur maka pemain harus:\n\n- menurunkan volume (dinamika) secara bertahap\n- memperlambat tempo sedikit demi sedikit\n- seolah pada atau lenyap perlahan, seperti nyala lilin yang meredup" }] },
+      { q: ["quasi"], a: [{ type: "text", content: "Quasi dari bahasa Itali yang artinya 'sepert' atau 'seolah-olah'." }, { type: "text", content: "Quasi digunakan untuk memberi perbandingan gaya atau karakter.\n\nArtinya bagian tersebut harus dimainkan menyerupai gaya yang disebut setelah kata 'quasi'.\n\nBukan benar-benar itu, tapi meniru suasananya." }, { type: "text", content: "Cara bermain:\n\n- Dengarkan atau rasakan karakter yang dibandingkan (misalnya allegro, recitativo, fantasia),\n- Mainkan dengan nuansa menyerupai - bukan meniru secara teknis, tapi secara emosi dan gaya." }] },
+      { q: ["valse"], a: [{ type: "text", content: "Valse adalah istilah dalam bahasa Perancis yang berarti 'waltz' - yaitu terian tiga ketukan (3/4) yang lembut, mengalun, dan berputar." }, { type: "text", content: "Dalam musik, 'valse' adalah jenis komposisi atau gaya permainan yang mengikuti irama khas tarian waltz." }, { type: "text", content: "Ciri-ciri musik Valse:\n\n- Birama 3/4 = tiga ketukan dalam satu bar:\n=> KUAT (ONE) - lemah (two) - lemah (three)" }] },
+      { q: ["mouvement"], a: [{ type: "text", content: "Mouvement berasal dari bahasa Perancis yang berarti 'gerakan' (movement)." }, { type: "text", content: "Dalam konteks musik klasik, istilah ini memiliki dua makna utama tergantung konteksnya:" }, { type: "text", content: "1. Sebagai bagian dari karya musik besar\n\nDalam sonata, simfoni, konserto, atau suite, 'mouvement' berarti bagian atau bab dari keseluruhan karya.\n\nMisalnya:\n\n- Simfoni biasanya terdiri dari 4 mouvements (gerakan):\n   a. Allegro (cepat)\n   b. Adagio (lambat)\n   c. Scherzo atau Menuet (tarian ringan, 3/4)\n   d. Finale (cepat dan kuat)\n\nContoh:\n'Symphonie No. 5 de Beethoven - 1er mouvement: Allegro conbrio'\n= Simfoni No. 5 karya Beethoven - Gerakan pertama: Allegro con brio." }, { type: "text", content: "2. Sebagai petunjuk ekspresi atau tempo\n\nDalam partitur, 'mouvement' juga bisa berarti pergerakan tempo atau karakter musik.\n\nMisalnya:\n\n- 'Avec mouvement' = dengan gerakan -> dimainkan dengan semangat, tidak lambat\n- 'Un peu de mouvement' = sedikit lebih cepat" }] },
+
+      // ISTILAH-ISTILAH GITAR
+      { q: ["bagian gitar", "komponen gitar"], a: [{ type: "text", content: "Berikut ini bagian-bagian gitar:\n\n- Kepala Gitar\n- Penyetel Senar\n- Nut\n- Leher Gitar\n- Fingerboard / Fretboard (papan jari)\n- Frets\n- Badan Gitar\n- Lubang suara\n- Pickup\n- Bridge\n- Saddle\n- Pickguard\n- Senar\n- Volume knob\n- Tone knob\n- Pickup selector switch\n- Strap Button\n- Output jack" }] },
+      { q: ["head", "kepala gitar"], a: [{ type: "text", content: "Kepala gitar atau 'head' atau 'headstock' adalah bagian paling atas gitar, yang fungsinya sebagai tempat menyetel senar (tuning) agar menghasilkan nada yang tepat." }] },
+      { q: ["tuning key", "tuning pegs", "machine head", "penyetel senar"], a: [{ type: "text", content: "Penyetel senar (tuning keys; tuning pegs; machine heads) digunakan untuk mengencangkan atau mengendurkan senar." }] },
+      { q: ["nut"], a: [{ type: "text", content: "Nut adalah batang kecil, biasanya dari tulang, plastik, atau logam, yang menahan senar di antara headstock dan fingerboard." }] },
+      { q: ["neck", "leher gitar"], a: [{ type: "text", content: "Leher Gitar (neck) adalah bagian panjang yang dipegang dengan tangan yang dominan, yang fungsinya sebagai tempat jari menekan senar untuk menghasilkan nada." }] },
+      { q: ["fret"], a: [{ type: "text", content: "Frets adalah logam tipis melintang di fingerboard untuk menentukan tinggi nada.\n\nSemakin dekat ke body maka nadanya semakin tinggi." }] },
+      { q: ["fingerboard", "fretboard"], a: [{ type: "text", content: "Fingerboard atau Fretboard adalah papan tempat jari menekan senar. Posisinya ada di leher gitar (neck)." }] },
+      { q: ["position marker", "penanda posisi"], a: [{ type: "text", content: "Penanda Posisi (position marker) adalah titik atau tanda kecil di fingerboard gitar yang membantu pemain mengetahui posisi fret dengan cepat tanpa harus melihat satu per satu." }] },
+      { q: ["soundhole", "lubang suara"], a: [{ type: "text", content: "Lubang suara (soundhole) adalah lubang pada gitar akustik yang berfungsi untuk menguatkan getaran senar." }] },
+      { q: ["body"], a: [{ type: "text", content: "Body atau badan gitar adalah bagian besar gitar yang bersentuhan dengan tubuh pemain.\n\nFungsinya untuk menghasilkan dan memperkuat suara." }] },
+      { q: ["pickguard"], a: [{ type: "text", content: "pickguard adalah pelindung body dari goresan pick saat dimainkan." }] },
+      { q: ["pickup"], a: [{ type: "text", content: "Pickup adalah salah satu bagian pada gitar elektrik untuk menangkap getaran senar dan mengubahnya menjadi sinyal listrik." }] },
+      { q: ["saddle gitar", "saddle guitar", "saddle"], a: [{ type: "text", content: "Saddle adalah bagian kecil di atas bridge yang membantu menentukan tinggi senar dari fretboard." }] },
+      { q: ["pickup selector switch"], a: [{ type: "text", content: "Pickup selector switch merupakan fitur pada gitar elektrik yang berfungsi untuk memilih pickup mana yang digunakan." }] },
+      { q: ["tone", "volume controls"], a: [{ type: "text", content: "Volume control adalah kenop (knob) pada gitar - terutama pada gitar elektrik - yang berfungsi untuk mengatur keras atau lembutnya suara yang keluar dari gitar ke amplifier." }] },
+      { q: ["bridge gitar"], a: [{ type: "text", content: "Bridge adalah tempat ujung bawah senar ditambatkan." }] },
+      { q: ["output jack"], a: [{ type: "text", content: "Output jack adalah lubang colokan pada gitar, biasanya terletak di body bagian bawah atau samping, yang merupakan tempat untuk menyambungkan kabel gitar (kabel jack) ke amplifier, efek pedal, atau alat rekam." }] },
+      { q: ["tuning", "stem"], a: [{ type: "text", content: "Tuning atau stem dalam musik berarti menyetel senar agar setiap senar menghasilkan nada yang tepat sesuai standar nada yang diinginkan." }] },
+      { q: ["playing position", "posisi bermain gitar", "posisi dalam bermain gitar", "posisi saat memegang gitar", "posisi saat bermain gitar"], a: [{ type: "text", content: "Saat bermain gitar pada umumnya posisi yang nyaman adalah seperti gambar di bawah ini..." }, { type: "image", content: "" }] },
+      { q: ["note", "not"], a: [{ type: "text", content: "Note (dibaca: nout) adalah istilah dalam musik yang berarti nada atau bunyi tertentu dengan tinggi (pitch) dan durasi (lama waktu) tertentu." }] },
+      { q: ["whole note", "whole not", "not penuh", "note penuh", "semibreve", "semi breve"], a: [{ type: "text", content: "Semibreve (dibaca: semi-briv) adalah nada utuh (whole note) dalam musik. Ini adalah nada dengan durasi terpanjang di antara not-not dasar - biasanya bernilai 4 ketukan dalam tanda birama 4/4." }] },
+      { q: ["half note", "half not", "not setengah", "note setengah", "not 1/2", "minim"], a: [{ type: "text", content: "Minim (disebut juga half note dalam bahasa Inggris) adalah notasi musik yang bernilai dua ketukan dalam tanda birama 4/4." }] },
+      { q: ["quarter note", "crotchet", "not 1/4"], a: [{ type: "text", content: "Crotchet atau disebut juga quarter note adalah notasi musik yang bernilai satu ketukan dalam tanda birama 4/4." }] },
+      { q: ["staff", "staf"], a: [{ type: "text", content: "Staff atau staf dalam bahasa Indonesia disebut juga paranada, adalah lima garis dan empat spasi yang digunakan untuk menulis notasi musik." }] },
+      { q: ["ledger lines", "garis bantu", "garis tambahan"], a: [{ type: "text", content: "Ledger line, dalam bahasa Indonesia disebut garis tambahan, adalah garis kecil yang ditambahkan di atas atau di bawah paranada (staff) untuk menulis nada-nada yang terlalu tinggi atau terlalu rendah." }] },
+      { q: ["clef", "tanda kunci"], a: [{ type: "text", content: "Clef (dibaca: klef) atau 'tanda kunci', adalah simbol di awal paranada (staff) yang menentukan nada pada garis-garis serta spasi di paranada tersebut." }] },
+      { q: ["measure", "bar"], a: [{ type: "text", content: "Bar, dalam bahasa Indonesia disebut birama, adalah bagian atau potongan kecil dalam musik yang dibatasi oleh garis vertikal yang disebut garis birama (bar line) di dalam staff (paranada)." }] },
+      { q: ["meters", "time signatures", "tanda birama"], a: [{ type: "text", content: "Tanda birama adalah simbol angka dalam bentuk pecahan, yang terletak di sebelah kiri paranada (staff), yang berfungsi untuk menunjukkan berapa ketukan (beat) dalam satu birama (bar) dan nilai not yang dihitung sebagai satu ketukan." }] },
+      { q: ["whole rest", "tanda istirahat penuh", "tanda diam semibreve"], a: [{ type: "text", content: "Tanda istirahat penuh atau tanda diam semibreve - dalam bahasa inggris 'whole rest', adalah simbol diam atau tidak berbunyi selama 4 ketukan penuh dalam birama 4/4. " }] },
+      { q: ["half rest"], a: [{ type: "text", content: "" }] },
+      { q: ["quarter rest"], a: [{ type: "text", content: "" }] },
+      { q: ["accidentals"], a: [{ type: "text", content: "" }] },
+      { q: ["sharp"], a: [{ type: "text", content: "" }] },
+      { q: ["flat"], a: [{ type: "text", content: "" }] },
+      { q: ["eighth note"], a: [{ type: "text", content: "" }] },
+      { q: ["eighth rest"], a: [{ type: "text", content: "" }] },
+      { q: ["pickup measure", "pickups"], a: [{ type: "text", content: "" }] },
+      { q: ["ties"], a: [{ type: "text", content: "" }] },
+      { q: ["dots"], a: [{ type: "text", content: "" }] },
+      { q: ["tab", "tablature"], a: [{ type: "text", content: "" }] },
+      { q: ["minor pattern"], a: [{ type: "text", content: "" }] },
+      { q: ["major pattern"], a: [{ type: "text", content: "" }] },
     ];
 
       // Tambahkan pesan ke layar
@@ -439,7 +355,3 @@
       sendMessage();
     }
   });
-</script>
-  </script>
-</body>
-</html>

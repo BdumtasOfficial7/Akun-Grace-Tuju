@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbot Pembelajaran Interaktif</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  h1 {
+    margin-top: 10px;
+    color: #333;
+  }
+  #chatContainer {
+    width: 95%;
+    max-width: 600px;
+    height: 80%;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #chatBox {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  .bot, .user {
+    margin: 8px 0;
+    padding: 10px 15px;
+    border-radius: 12px;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  .bot {
+    background: #e7f3ff;
+    align-self: flex-start;
+  }
+  .user {
+    background: #d1ffd7;
+    align-self: flex-end;
+  }
+  #inputArea {
+    display: flex;
+    border-top: 1px solid #ddd;
+  }
+  #userInput {
+    flex: 1;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 0 0 0 15px;
+    outline: none;
+  }
+  button {
+    border: none;
+    background: #0078d7;
+    color: #fff;
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 0 0 15px 0;
+    cursor: pointer;
+  }
+  img, iframe {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+  canvas {
+    width: 100%;
+    height: 100px;
+  }
+</style>
+</head>
+<body>
+<h1>🤖 Chatbot Pembelajaran Interaktif</h1>
+<div id="chatContainer">
+  <div id="chatBox">Versi 1.2 <br> Tutorial: <br> ketik "Apa yang bisa kamu lakukan?"</div>
+  <div id="inputArea">
+    <input type="text" id="userInput" placeholder="Ketik pertanyaan di sini...">
+    <button onclick="sendMessage()">Kirim</button>
+  </div>
+</div>
+
+<script>
+const chatBox = document.getElementById("chatBox");
+const userInput = document.getElementById("userInput");
+
+// ======== Basis Pengetahuan Sederhana ========
+const topics = {
+  "gitar": {
+    short: "Gitar adalah alat musik berdawai yang dimainkan dengan cara dipetik.",
+    long: "Gitar terdiri dari beberapa bagian utama seperti body, neck, fretboard, senar, dan bridge. Gitar dapat akustik atau elektrik dan digunakan di berbagai genre musik.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/4/45/GuitareClassique5.png",
+    video: "https://www.youtube.com/embed/1hY_cklY_2A"
+  },
+  "alat musik piano": {
+    short: "Piano adalah alat musik yang dimainkan dengan menekan tuts.",
+    long: "Piano menghasilkan bunyi dari senar yang dipukul oleh hammer di dalam instrumen. Piano digunakan untuk berbagai genre musik, dari klasik hingga pop modern.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/51/Piano_diagrams.jpg",
+    video: "https://www.youtube.com/embed/7R-KLGEj5eI"
+  },
+  "'not'": {
+    short: "Not adalah lambang atau simbol yang digunakan untuk menentukan bunyi musik dan memiliki tinggi dan durasi tertentu.",
+    long: "Setiap not menunjukkan seberapa tinggi atau rendah bunyinya dan berapa lama nada itu ditahan. Not ditulis pada garis paranada (staff). Untuk menentukan nada, pemain perlu melihat posisi not pada garis paranada. Semakin ke atas not, maka semakin tinggi nada. Sebaliknya, semakin ke bawah not maka nada akan semakin rendah. Untuk menentukan durasi, pemain perlu melihat jenis atau bentuk not yang digunakan.",
+    image: "img/not_balok_pada_staff.gif",
+    video: "https://www.youtube.com/embed/z5R11IcSt8I"
+  },
+  "nada natural": {
+    short: "Nada natural adalah nada asli, yaitu nada yang tidak diberi tanda kres (#) atau mol (b).",
+    long: "Nada natural = nada tanpa perubahan tinggi atau rendah dari bentuk aslinya. Ada 7 nada natural: C - D - E - F - G - A - B. Pada piano, nada natural adalah tugs putih.",
+    image: "img/nada_natural.jpg",
+    video: "https://www.youtube.com/embed/z5R11IcSt8I"
+  },
+  "bentuk not": {
+    short: "Bentuk not adalah simbol atau gambar yang menunjukkan nilai ketukan.",
+    long: "Bentuk not menunjukkan: berapa lama bunyi dimainkan; bagaimana cara menghitung iramanya. Pada umumnya ada 6 bentuk not yang sering digunakan: not penuh (semibreve), not setengah (minim), not seperempat (crotchet), not seperdelapan (quaver), not seperenambelas (semiquaver), dan not sepertigapuluhdua (demisemiquaver).",
+    image: "img/bentuk_not.png",
+    video: "https://www.youtube.com/embed/I5frtDJzgss"
+  },
+  "'p'": {
+    short: "'p' adalah singkatan dari 'piano' dalam dinamika musik, yang artinya 'lembut' atau 'pelan'.",
+    long: "Jika ada tanda atau simbol 'p' di partitur, maka bagian itu harus dimainkan dengan sentuhan ringan, tidak menekan terlalu kuat, dan tetap menjaga kejelasan nada meskipun volumenya kecil.",
+    image:"img/tanda_dinamika_piano_p.jpg",
+    video: "https://www.youtube.com/embed/Hxb8juWQdcQ"
+  },
+  "piano": {
+    short: "'piano' biasa disingkat 'p' adalah istilah dalam dinamika musik, yang artinya 'lembut' atau 'pelan'.",
+    long: "Jika ada tanda atau simbol 'p' di partitur, maka bagian itu harus dimainkan dengan sentuhan ringan, tidak menekan terlalu kuat, dan tetap menjaga kejelasan nada meskipun volumenya kecil.",
+    image:"img/tanda_dinamika_piano_p.jpg",
+    video: "https://www.youtube.com/embed/Hxb8juWQdcQ"
+  },
+  "'pp'": {
+    short: "",
+    long: "",
+    image: "",
+    video: ""
+  },
+  "forte": {
+    short: "Forte berarti dimainkan dengan keras atau kuat.",
+    long: "Dalam notasi musik, forte dilambangkan dengan huruf 'f' dan menunjukkan bahwa bagian musik tersebut harus dimainkan dengan kekuatan atau volume besar.\n\nCara memainkan forte (f) adalah:\n\n- Piano\nTekan tuts dengan tekanan kuat namun terkontrol. Gunakan tenaga dari berat tangan dan lengan, bukan sekadar jari. Hindari memukul tuts, karena suara harus tetap jernih dan bulat, bukan kasar.\n\n- Gitar\nPetik senar dengan tenaga lebih kuat. Jika menggunakan gitar elektrik, kamu juga bisa meningkatkan volume amplifier untuk efek lebih 'forte'.",
+    image: "img/tanda_dinamika_forte_f.jpg",
+    video: "https://www.youtube.com/embed/bY-GXTxNa4o"
+  },
+  "'f'": {
+    short: "'f' dalam musik adalah singkatan dari kata 'forte' bahasa Italia yang artinya 'kuat'atau 'keras'.",
+    long: "Dalam notasi musik, forte dilambangkan dengan huruf 'f' dan menunjukkan bahwa bagian musik tersebut harus dimainkan dengan kekuatan atau volume besar.\n\nCara memainkan forte (f) adalah:\n\n- Piano\nTekan tuts dengan tekanan kuat namun terkontrol. Gunakan tenaga dari berat tangan dan lengan, bukan sekadar jari. Hindari memukul tuts, karena suara harus tetap jernih dan bulat, bukan kasar.\n\n- Gitar\nPetik senar dengan tenaga lebih kuat. Jika menggunakan gitar elektrik, kamu juga bisa meningkatkan volume amplifier untuk efek lebih 'forte'.",
+    image: "img/tanda_dinamika_forte_f.jpg",
+    video: "https://www.youtube.com/embed/bY-GXTxNa4o"
+  },
+  "'cresc.'": {
+    short: "'cresc.' adalah singkatan dari bahasa Italia 'crescendo' yang artinya 'semakin keras'.",
+    long: "Dalam notasi musik, cresc. berfungsi untuk membuat musik dari lembut (piano) ke keras (forte). Artinya, apabila ada tanda 'cresc.' di partitur, bagian itu harus dimainkan mulai dari suara lembut, lalu perlahan-lahan menambah kekuatan atau tekanan sampai mencapai volume yang lebih kelas.\n\nSimbol lain dari 'cresc.' adalah simbol '<'.",
+    image: "img/tanda_dinamika_crescendo_cresc.jpg",
+    video: "https://www.youtube.com/embed/dftvtoyMQtA"
+  },
+  "crescendo": {
+    short: "Crescendo atau biasa disingkat 'cresc.' adalah istilah dari bahasa Italia yang artinya 'semakin keras'.",
+    long: "Dalam notasi musik, cresc. berfungsi untuk membuat musik dari lembut (piano) ke keras (forte). Artinya, apabila ada tanda 'cresc.' di partitur, bagian itu harus dimainkan mulai dari suara lembut, lalu perlahan-lahan menambah kekuatan atau tekanan sampai mencapai volume yang lebih kelas.\n\nSimbol lain dari 'cresc.' adalah simbol '<'.",
+    image: "img/tanda_dinamika_crescendo_cresc.jpg",
+    video: "https://www.youtube.com/embed/dftvtoyMQtA"
+  },
+  "dolce": {
+    short: "'Dolce' berasal dari bahasa Italia yang artinya 'manis', 'lembut', atau 'penuh kasih'.",
+    long: "Dalam musik, kata 'dolce' menunjukkan cara memainkan nada dengan ekspresi 'manis' dan 'hangat'. Tanda ini tidak menunjukkan volume (keras/lembut) seperti p (piano) atau f (forte), tapi menunjukkan karakter suara dan emosi.",
+    image: "img/dolce.jpg",
+    video: ""
+  },
+  "'dol.'": {
+    short: "'dol.' atau dolce berasal dari bahasa Italia yang artinya 'manis', 'lembut', atau 'penuh kasih'.",
+    long: "Dalam musik, kata 'dolce' menunjukkan cara memainkan nada dengan ekspresi 'manis' dan 'hangat'. Tanda ini tidak menunjukkan volume (keras/lembut) seperti p (piano) atau f (forte), tapi menunjukkan karakter suara dan emosi.",
+    image: "img/dolce.jpg",
+    video: ""
+  },
+  "'sf'": {
+    short: "'sf' adalah singkatan dari sforzando (kadang ditulis juga sfz atau fz) yang berasal dari bahasa Italia yang artinya 'dengan tekanan kuat' atau 'ditekan dengan tiba-tiba'.",
+    long: "Jika ada tanda 'sf' di partitur maka lagu harus dimainkan dengan tekanan yang kuat, aksen harus kuat, tegas, dan tiba-tiba.",
+    image: "",
+    video: ""
+  },
+  "dol. e poco riten.": {
+    short: "'dol. e poco riten.' adalah singkatan dari bahasa Italia 'dolce e poco retenuto' yang artinya: 'manis dan sedikit diperlambat'.",
+    long: "Istilah ini merupakan gabungan dari setiap kata: 'dol.' atau dolce yang artinya manis/lembut/penuh kasih, 'e' adalah kata sambung dari bahasa Italia yang artinya 'dan', 'poco' artinya 'sedikit', dan 'riten.' adalah singkatan dari ritenuto yang artinya 'diperlambat'.",
+    image: "",
+    video: ""
+  },
+  "dim. e poco riten.": {
+    short: "'dim. e poco riten.' adalah singkatan dari bahasa Italia 'diminuendo e poco ritenuto' yang artinya 'semakin lembut dan sedikit diperlambat'.",
+    long: "Istilah ini merupakan gabungan dari setiap kata: 'dim.' atau 'diminuendo' yang artinya 'secara bertahap semakin lembut', 'e' adalah kata sambung dari bahasa Italia yang artinya 'dan', 'poco' artinya 'sedikit', dan 'riten.' adalah singkatan dari ritenuto yang artinya 'diperlambat'.",
+    image: "",
+    video: ""
+  },
+  "dim.": {
+    short: ""
+  },
+  "diminuendo": {
+    short: ""
+  },
+  "'e'": {
+    short: ""
+  },
+  "poco": {
+    short: ""
+  },
+  "'riten.'": {
+    short: ""
+  },
+  "ritenuto": {
+    short: ""
+  },
+  "a tempo": {
+    short: ""
+  },
+  "'a'": {
+    short: ""
+  },
+  "tempo": {
+    short: ""
+  }
+};
+
+// ======== Status Percakapan ========
+let currentTopic = null;
+let expectingYesNo = false;
+let expectingMedia = false;
+let tunerStream = null;
+let tunerRunning = false;
+let tunerAnimation = null;
+
+// ======== Fungsi Dasar ========
+function appendMessage(sender, text) {
+  const div = document.createElement("div");
+  div.classList.add(sender);
+  div.innerHTML = text;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function sendMessage() {
+  const text = userInput.value.trim();
+  if (!text) return;
+  appendMessage("user", text);
+  processInput(text.toLowerCase());
+  userInput.value = "";
+}
+
+function similarity(a, b) {
+  const longer = a.length > b.length ? a : b;
+  const shorter = a.length > b.length ? b : a;
+  const longerLength = longer.length;
+  if (longerLength === 0) return 1.0;
+  const editDistance = levenshtein(longer, shorter);
+  return (longerLength - editDistance) / parseFloat(longerLength);
+}
+
+function levenshtein(a, b) {
+  const dp = Array(a.length + 1).fill(null).map(() => Array(b.length + 1).fill(null));
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      );
+    }
+  }
+  return dp[a.length][b.length];
+}
+
+// ======== Proses Input ========
+function processInput(input) {
+  if (expectingYesNo) {
+    if (input === "ya") {
+      appendMessage("bot", topics[currentTopic].long);
+      appendMessage("bot", "Saya bisa menampilkan gambar atau video untuk pembelajaran lebih optimal. Apa yang anda ingin saya tampilkan?");
+      expectingYesNo = false;
+      expectingMedia = true;
+    } else if (input === "tidak") {
+      appendMessage("bot", "Baik, penjelasan selesai. Silahkan bertanya topik lain.");
+      expectingYesNo = false;
+      currentTopic = null;
+    } else {
+      appendMessage("bot", 'Silahkan jawab "ya" atau "tidak" untuk melanjutkan.');
+    }
+    return;
+  }
+
+  if (expectingMedia) {
+    if (input.includes("gambar")) {
+      showImage(currentTopic);
+      expectingMedia = false;
+      appendMessage("bot", "Penjelasan selesai. Silahkan bertanya topik lain.");
+      currentTopic = null;
+    } else if (input.includes("video")) {
+      showVideo(currentTopic);
+      expectingMedia = false;
+      appendMessage("bot", "Penjelasan selesai. Silahkan bertanya topik lain.");
+      currentTopic = null;
+    } else {
+      appendMessage("bot", "Silahkan pilih 'gambar' atau 'video'.");
+    }
+    return;
+  }
+
+  if (input.includes("apa yang bisa kamu lakukan")) {
+    appendMessage("bot", `
+      Saya bisa membantu Anda belajar dengan cara:
+      <ul>
+        <li>Menjelaskan topik (misal: "apa itu gitar")</li>
+        <li>Menampilkan gambar atau video pembelajaran(misal: "tampilkan gambar/video tentang gitar"</li>
+        <li>Membantu menyetem gitar (ketik: "tolong bantu saya menyetem gitar"; "stop tuner" untuk berhenti)</li>
+        <li>Memainkan nada (ketik: "saya ingin dengar nada C")</li>
+      </ul>
+
+      Catatan:
+      <ul>
+        <li>Jika kata yang Anda cari berupa singkatan, maka anda harus memasukkan kata itu dalam tanda kutip satu (''). Misalnya cresc. (crescendo) menjadi 'cresc.'. Contohnya: "apa itu 'cresc.'?".</li>
+        <li>Jika kata yang anda cari berupa simbol, maka anda juga harus memasukkan kata itu ke dalam tanda kutip satu (''). Misalnya p (piano) menjadi 'p', atau f (forte) menjadi 'f'. Contohnya: "apa itu 'p'?".</li>
+      </ul>
+      Silakan tanyakan topik apa pun!
+    `);
+    return;
+  }
+
+  if (
+    input.includes("setem") || 
+    input.includes("menyetem")) {
+    startGuitarTuner();
+    return;
+  }
+
+  if (input.includes("dengar nada")) {
+    const note = input.split("nada")[1].trim().toUpperCase();
+    playNote(note);
+    return;
+  }
+
+  if (input.includes("gambar")) {
+    for (let key in topics) {
+      if (input.includes(key)) return showImage(key);
+    }
+    appendMessage("bot", "Maaf, saya tidak menemukan topik itu.");
+    return;
+  }
+
+  if (input.includes("video")) {
+    for (let key in topics) {
+      if (input.includes(key)) return showVideo(key);
+    }
+    appendMessage("bot", "Maaf, saya tidak menemukan topik itu.");
+    return;
+  }
+
+  if (input.includes("matikan tuner") || input.includes("stop tuner")) {
+    stopGuitarTuner();
+    return;
+  }
+
+  // "apa itu..." / "apa yang dimaksud dengan..."
+  if (input.startsWith("apa itu") || input.startsWith("apa yang dimaksud")) {
+  // Ambil kata setelah "apa itu" atau "apa yang dimaksud dengan"
+  let topicWord = input.replace("apa itu", "")
+                       .replace("apa yang dimaksud dengan", "")
+                       .trim();
+
+  // Hilangkan tanda baca jika ada
+  topicWord = topicWord.replace(/[?.!,]/g, "").trim();
+
+  const topic = findClosestTopic(topicWord);
+  if (topic) {
+    currentTopic = topic;
+    appendMessage("bot", topics[topic].short);
+    appendMessage("bot", "Apakah Anda ingin penjelasan lebih lanjut?");
+    expectingYesNo = true;
+  } else {
+    appendMessage("bot", `Maaf, saya belum punya penjelasan untuk topik "${topicWord}".`);
+  }
+  return;
+}
+
+  appendMessage("bot", "Saya tidak yakin dengan maksud Anda. Coba tanyakan dengan format 'apa itu ...'.");
+}
+
+function findClosestTopic(input) {
+  let bestMatch = null, bestScore = 0.5;
+  for (let key in topics) {
+    const score = similarity(input, key);
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = key;
+    }
+  }
+  return bestMatch;
+}
+
+// ======== Fitur Gambar & Video ========
+function showImage(topic) {
+  const url = topics[topic]?.image;
+  if (url) appendMessage("bot", `Baik. Ini gambar tentang ${topic}:<br><img src="${url}">`);
+}
+function showVideo(topic) {
+  const url = topics[topic]?.video;
+  if (url) appendMessage("bot", `Baik. Ini video tentang ${topic}:<br><iframe width="100%" height="250" src="${url}" frameborder="0" allowfullscreen></iframe>`);
+}
+
+// ======== Fitur Nada ========
+function playNote(note) {
+  const context = new (window.AudioContext || window.webkitAudioContext)();
+  const oscillator = context.createOscillator();
+  const notes = {C:261.63, D:293.66, E:329.63, F:349.23, G:392.00, A:440.00, B:493.88};
+  if (!notes[note]) {
+    appendMessage("bot", "Nada tidak dikenali. Coba C, D, E, F, G, A, atau B.");
+    return;
+  }
+  oscillator.type = 'sine';
+  oscillator.frequency.setValueAtTime(notes[note], context.currentTime);
+  oscillator.connect(context.destination);
+  oscillator.start();
+  oscillator.stop(context.currentTime + 1.5);
+  appendMessage("bot", `Memainkan nada ${note} 🎵`);
+}
+
+// ======== Fitur Penyetem Gitar ========
+function startGuitarTuner() {
+  appendMessage("bot", "🎸 Tuner aktif! Petik salah satu senar (E, A, D, G, B, e).");
+  
+  const noteDisplay = document.createElement("div");
+  noteDisplay.style.textAlign = "center";
+  noteDisplay.style.fontWeight = "bold";
+  noteDisplay.style.marginTop = "8px";
+  chatBox.appendChild(noteDisplay);
+
+  const canvas = document.createElement("canvas");
+  canvas.height = 100;
+  chatBox.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+
+  const notesFreq = {
+    "E2": 82.41,
+    "A2": 110.00,
+    "D3": 146.83,
+    "G3": 196.00,
+    "B3": 246.94,
+    "E4": 329.63
+  };
+
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(stream => {
+        tunerStream = stream;
+        tunerRunning = true;
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const analyser = audioCtx.createAnalyser();
+      const source = audioCtx.createMediaStreamSource(stream);
+      source.connect(analyser);
+      analyser.fftSize = 2048;
+      const bufferLength = analyser.fftSize;
+      const dataArray = new Float32Array(bufferLength);
+
+      function autoCorrelate(buffer, sampleRate) {
+        let SIZE = buffer.length;
+        let rms = 0;
+        for (let i = 0; i < SIZE; i++) rms += buffer[i] * buffer[i];
+        rms = Math.sqrt(rms / SIZE);
+        if (rms < 0.01) return -1;
+
+        let r1 = 0, r2 = SIZE - 1, thres = 0.2;
+        for (let i = 0; i < SIZE / 2; i++) {
+          if (Math.abs(buffer[i]) < thres) { r1 = i; break; }
+        }
+        for (let i = 1; i < SIZE / 2; i++) {
+          if (Math.abs(buffer[SIZE - i]) < thres) { r2 = SIZE - i; break; }
+        }
+
+        buffer = buffer.slice(r1, r2);
+        SIZE = buffer.length;
+
+        let c = new Array(SIZE).fill(0);
+        for (let i = 0; i < SIZE; i++) {
+          for (let j = 0; j < SIZE - i; j++) {
+            c[i] = c[i] + buffer[j] * buffer[j + i];
+          }
+        }
+
+        let d = 0; while (c[d] > c[d + 1]) d++;
+        let maxval = -1, maxpos = -1;
+        for (let i = d; i < SIZE; i++) {
+          if (c[i] > maxval) { maxval = c[i]; maxpos = i; }
+        }
+        let T0 = maxpos;
+
+        return sampleRate / T0;
+      }
+
+      function closestString(frequency) {
+        let closestNote = null;
+        let minDiff = Infinity;
+        for (let note in notesFreq) {
+          const diff = Math.abs(notesFreq[note] - frequency);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestNote = note;
+          }
+        }
+        return closestNote;
+      }
+
+      function draw() {
+        if (!tunerRunning) return;
+        tunerAnimation = requestAnimationFrame(draw);
+        analyser.getFloatTimeDomainData(dataArray);
+        const freq = autoCorrelate(dataArray, audioCtx.sampleRate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (freq !== -1) {
+          const note = closestString(freq);
+          const diff = freq - notesFreq[note];
+          let color = "#0078d7";
+
+          if (Math.abs(diff) < 1) color = "#00cc66"; // Pas
+          else if (diff > 0) color = "#ff3333"; // Terlalu tinggi
+          else color = "#3399ff"; // Terlalu rendah
+
+          ctx.fillStyle = color;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "#fff";
+          ctx.font = "20px Segoe UI";
+          ctx.fillText(`Frekuensi: ${freq.toFixed(2)} Hz`, 20, 50);
+
+          noteDisplay.textContent = `Senar terdekat: ${note} (${freq.toFixed(2)} Hz)`;
+          noteDisplay.style.color = color;
+        } else {
+          noteDisplay.textContent = "Tidak ada sinyal suara...";
+          noteDisplay.style.color = "#555";
+        }
+      }
+      draw();
+    })
+    .catch(() => appendMessage("bot", "Izin mikrofon ditolak. Tidak bisa menjalankan tuner."));
+}
+
+function stopGuitarTuner() {
+    if (tunerStream) {
+        tunerStream.getTracks().forEach(track => track.stop());
+        tunerStream = null;
+    }
+    tunerRunning = false;
+    if (tunerAnimation) cancelAnimationFrame(tunerAnimation);
+    appendMessage("bot", "Tuner dimatikan.");
+}
+</script>
+</body>
+</html>

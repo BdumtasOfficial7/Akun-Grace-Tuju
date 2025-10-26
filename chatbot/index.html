@@ -21,7 +21,7 @@
   #chatContainer {
     width: 95%;
     max-width: 600px;
-    height: 80%;
+    height: calc(100vh - 120px);
     background: #fff;
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
@@ -32,7 +32,7 @@
   #chatBox {
     flex: 1;
     padding: 15px;
-    overflow-y: auto;
+    overflow-y: scroll;
     font-size: 16px;
     scroll-behavior: smooth;
   }
@@ -72,6 +72,9 @@
     border-radius: 0 0 15px 0;
     cursor: pointer;
   }
+  button:active {
+    opacity: 0.8;
+  }
   img, iframe {
     max-width: 100%;
     border-radius: 10px;
@@ -86,7 +89,7 @@
 <body>
 <h1>🤖 Chatbot Pembelajaran Interaktif</h1>
 <div id="chatContainer">
-  <div id="chatBox">Tutorial: <br> ketik "Apa yang bisa kamu lakukan?"</div>
+  <div id="chatBox">Versi 1.2</div>
   <div id="inputArea">
     <input type="text" id="userInput" placeholder="Ketik pertanyaan di sini...">
     <button onclick="sendMessage()">Kirim</button>
@@ -96,6 +99,8 @@
 <script>
 const chatBox = document.getElementById("chatBox");
 const userInput = document.getElementById("userInput");
+
+appendMessage("bot", "Halo! Saya adalah asisten pembelajaran Anda. Ketik 'apa yang bisa kamu lakukan?' untuk melihat fitur saya.");
 
 // ======== Basis Pengetahuan Sederhana ========
 const topics = {
@@ -235,96 +240,162 @@ const topics = {
     short: "'sf' adalah singkatan dari sforzando (kadang ditulis juga sfz atau fz) yang berasal dari bahasa Italia yang artinya 'dengan tekanan kuat' atau 'ditekan dengan tiba-tiba'.",
     long: "Jika ada tanda 'sf' di partitur maka lagu harus dimainkan dengan tekanan yang kuat, aksen harus kuat, tegas, dan tiba-tiba.",
     image: "img/sf.jpg",
-    video: ""
+    video: "https://www.youtube.com/embed/nVrKCCgABOo"
   },
   "dol. e poco riten.": {
-    short: "'dol. e poco riten.' adalah singkatan dari bahasa Italia 'dolce e poco retenuto' yang artinya: 'manis dan sedikit diperlambat'.",
+    short: "'dol. e poco riten.' adalah singkatan dari bahasa Italia 'dolce e poco ritenuto' yang artinya: 'manis dan sedikit diperlambat'.",
     long: "Istilah ini merupakan gabungan dari setiap kata: 'dol.' atau dolce yang artinya manis/lembut/penuh kasih, 'e' adalah kata sambung dari bahasa Italia yang artinya 'dan', 'poco' artinya 'sedikit', dan 'riten.' adalah singkatan dari ritenuto yang artinya 'diperlambat'.",
     image: "img/dol_e_poco_riten.jpg",
     video: ""
   },
   "dim. e poco riten.": {
-    short: "'dim. e poco riten.' adalah singkatan dari bahasa Italia 'diminuendo e poco ritenuto' yang artinya 'semakin lembut dan sedikit diperlambat'.",
-    long: "Istilah ini merupakan gabungan dari setiap kata: 'dim.' atau 'diminuendo' yang artinya 'secara bertahap semakin lembut', 'e' adalah kata sambung dari bahasa Italia yang artinya 'dan', 'poco' artinya 'sedikit', dan 'riten.' adalah singkatan dari ritenuto yang artinya 'diperlambat'.",
+    short: "'dim. e poco riten.' adalah singkatan dari bahasa Italia 'diminuendo e poco ritenuto' yang artinya 'semakin lembut dan sedikit ditahan'.",
+    long: "Istilah ini merupakan gabungan dari setiap kata: 'dim.' atau 'diminuendo' yang artinya 'secara bertahap semakin lembut', 'e' adalah kata sambung dari bahasa Italia yang artinya 'dan', 'poco' artinya 'sedikit', dan 'riten.' adalah singkatan dari ritenuto yang artinya 'ditahan'.",
     image: "img/dim_e_poco_riten.jpg",
     video: ""
   },
   "'dim.'": {
-    short: ""
+    short: "'dim.' adalah singkatan dari diminuendo yang berarti perlahan-lahan menjadi lebih lembut.",
+    long: "Istilah ini termasuk dalam tanda dinamika, yaitu tanda yang menunjukkan perubahan volume atau kekuatan suara dalam musik. Apabila ada tanda ini di partitur, maka pemain harus secara bertahap menurunkan volume suara, semakin lama semakin pelan atau semakin lembut.",
+    image: "",
+    vide: ""
   },
   "diminuendo": {
-    short: ""
+    short: "Diminuendo atau biasanya disingkat 'dim.' berarti perlahan-lahan menjadi lebih lembut.",
+    long: "Istilah ini termasuk dalam tanda dinamika, yaitu tanda yang menunjukkan perubahan volume atau kekuatan suara dalam musik. Apabila ada tanda ini di partitur, maka pemain harus secara bertahap menurunkan volume suara, semakin lama semakin pelan atau semakin lembut.",
+    image: "",
+    video: ""
   },
   "'dimin.'": {
-    short: ""
+    short: "'dimin.' adalah singkatan dari diminishing atau lebih tepatnya dari istilah Italia 'diminuendo' atau 'dim.', yang artinya perlahan-lahan menjadi lebih lembut.",
+    long: "Istilah ini termasuk dalam tanda dinamika, yaitu tanda yang menunjukkan perubahan volume atau kekuatan suara dalam musik. Apabila ada tanda ini di partitur, maka pemain harus secara bertahap menurunkan volume suara, semakin lama semakin pelan atau semakin lembut.",
+    image: "",
+    video: ""
   },
   "'e'": {
-    short: ""
+    short: "Dalam musik 'e' berasal dari bahasa Italia yang artinya 'dan'.",
+    long: "Huruf 'e' digunakan untuk menggabungkan dua perintah atau tanda musik agar dimainkan bersamaan atau berurutan. Contohnya: 'dol. e poco riten.' yang artinya 'lembut dan seikit melambat.'",
+    image: "",
+    video: ""
   },
   "poco": {
-    short: ""
+    short: "Poco adalah istilah musik dari bahasa Italia yang berarti 'sedikit'.",
+    long: "Kata ini sering digunakan untuk memodifikasi atau memperhalus makna tanda tempo, dinamika, atau ekspresi musik.",
+    image: "",
+    video: ""
   },
   "'riten.'": {
-    short: ""
+    short: "'riten.' adalah singkatan dari ritenuto yang artinya 'ditahan'.",
+    long: "Lebih dalam lagi, 'riten.' artinya 'tertahan' atau 'melambat secara tiba-tiba dan ditahan temponya'. Makna umumnya adalah 'lebih lambat secara mendadak, kemudian dipertahanakan pada tempo itu untuk sementara waktu.",
+    image: "",
+    video: ""
   },
   "ritenuto": {
-    short: ""
+    short: "Ritenuto atau biasanya disingkat 'riten.' artinya 'ditahan'.",
+    long: "Lebih dalam lagi, 'riten.' artinya 'tertahan' atau 'melambat secara tiba-tiba dan ditahan temponya'. Makna umumnya adalah 'lebih lambat secara mendadak, kemudian dipertahanakan pada tempo itu untuk sementara waktu.",
+    image: "",
+    video: ""
   },
   "a tempo": {
-    short: "a tempo adalah...."
+    short: "A tempo adalah istilah musik dari bahasa Italia yang berarti 'kembali ke tempo semula'.",
+    long: "A tempo digunakan setelah ada perubahan tempo, misalnya saat ada 'ritardando' (melambat), maka untuk mengembalikan ke tempo semula setelah itu ada 'a tempo'.",
+    image: "",
+    video: ""
   },
   "'a'": {
-    short: "'a' adalah ...."
+    short: "Dalam istilah musik 'a' berasal dari bahasa Italia yang berarti 'ke' atau 'dengan'.",
+    long: "Contoh penggunaan 'a' adalah pada 'a tempo' yang artinya 'kembali ke tempo semula', atau 'a cappella' yang artinya 'bernyanyi tanpa iringan alat musik', dsb....",
+    image: "",
+    video: ""
   },
   "tempo": {
-    short: "tempo adalah ..."
+    short: "Kata 'tempo' berasal dari bahasa Italia yang berarti 'waktu'.",
+    long: "Dalam musik, tempo adalah istilah yang berarti cepat lambat sebuah lagu dimainkan. Tempo menentukan berapa cepat detak atau ketukan (beat) dalam satu lagu. Biasanya diukur dalam satuan 'bpm' atau Beat Per Minute.",
+    image: "",
+    video: ""
   },
   "leggiero": {
-    short: ""
+    short: "Leggiero adalah istilah musik dari bahasa Italia yang berarti 'ringan' atau 'lembut'.",
+    long: "Apabila ada istilah 'leggiero' di partitur maka pemain harus memainkan nada dengan ringan, halus, dan lepas. Musik harus terdengar mengalir, tidak berat, dan lentur. Nada dimainkan tidak keras, tidak ditekan, dan sedikit melayang di antara nada-nada lain.",
+    image: "",
+    video: ""
   },
   "dim. e poco rall.": {
-    short: ""
+    short: "'dim. e poco rall.' artinya 'perlahan-lahan menjadi lebih lembut dan sedikit melambat'.",
+    long: "'dim. e poco rall.' adalah gabungan dua istilah musik: 'dim.' atau diminuendo, yang berarti 'perlahan-lahan menjadi lebih lembut'; 'poco rall.' atau poco rallentando, yang berarti 'perlahan-lahan melambat, tidak terlalu drastis. Artinya jika tertulis di partitur 'dim. e poco rall.' maka pemain harus memainkan musik perlahan-lahan semakin lembut dan sedikit melambat.",
+    image: "",
+    video: ""
   },
-  "rall": {
-    short: ""
+  "'rall.'": {
+    short: "'rall.' adalah singkatan dari rallentando yang berasal dari bahasa Italia yang berarti 'perlahan-lahan melambat'.",
+    long: "Ini merupakan kategori tempo. Nuansa lambatnya terasa halus dan bertahap, berbeda dengan ritenuto (riten.) yang melambat secara tiba-tiba.",
+    image: "",
+    video: ""
   },
   "rallentando": {
-    short: ""
+    short: "rallentando atau biasa disingkat 'rall.' adalah istilah dari bahasa Italia yang berarti 'perlahan-lahan melambat'.",
+    long: "Ini merupakan kategori tempo. Nuansa lambatnya terasa halus dan bertahap, berbeda dengan ritenuto (riten.) yang melambat secara tiba-tiba.",
+    image: "",
+    video: ""
   },
   "risoluto": {
-    short: ""
+    short: "Risoluto adalah istilah musik dari bahasa Italia yang artinya 'tegas', 'kuat', atau 'mantap'.",
+    long: "Ini merupakan salah satu ekspresi atau artikulasi musik. Risoluto berarti penuh keyakinan dan tegas. Jadi, jika ada 'risoluto' di partitur, maka bagian itu harus dimainkan dengan yakin dan ditekankan. 'risoluto' sering kali ada di bagian klimaks.",
+    image: "",
+    video: ""
   },
   "scherzando": {
-    short: ""
+    short: "Scherzando adalah istilah musik dari bahasa Italia yang berarti 'bercanda', 'ceria', atau 'bermain-main'.",
+    long: "Ini merupakan salah satu ekspresi musik. Asal katanya 'scherzare' yang artinya 'bercanda'. Jadi, jika ada 'scherzando' di partitur, artinya bagian itu harus dimainkan dengan ringan, gembir, dan lincah, seolah-olah sedang bercanda atau bermain. Nadanya harus ringan dan cepat. Ritmenya lincah, hidup, dan ceria. Hindari tekanan berat atau nada yang terlalu serius.",
+    image: "",
+    video: ""
   },
   "cantabile": {
-    short: ""
+    short: "Cantabile berasal dari bahasa Italia yang artinya 'seperti bernyanyi' atau 'dengan gaya nyanyian'.",
+    long: "Ini merupakan salah satu ekspresi musik. Secara harfiah 'cantabile' berasal dari kata 'cantare' yang berarti 'menyanyi'. Jadi jika ada 'cantabile' di partitur, maka bagian itu harus dimainkan dengan nada yang lembut, mengalun, dan ekspresif, seolah-olah instrumennya sedang menyanyi. Gunakan frase panjang dan halus (legato). Perhatikan juga melodi utama agar terdengar emosional dan bernyawa. Hindari pukulan keras atau putus-putus.",
+    image: "",
+    video: ""
   },
   "'mf'": {
-    short: ""
+    short: "'mf' adalah singkatan dari 'mezzo forte' yang artinya 'cukup keras' atau 'setengah kuat'.",
+    long: "'mf' menunjukkan bahwa musik harus dimainkan tidak terlalu pelan dan tidak terlalu keras, tetapi dengan kekuatan sedang.",
+    image: "",
+    video: ""
   },
   "grazioso": {
-    short: ""
+    short: "Grazioso adalah istilah musik dari bahasa Italia yang berarti 'anggun', 'lembut', atau 'menawan'.",
+    long: "Grazioso berasal dari kata 'grazia' yang artinya 'keanggunan' atau 'keelokan'. Ini merupakan salah satu ekspresi musik. Apabila ada 'grazioso' di partitur, artinya pemain harus memainkan bagian itu dengan gaya yang anggun, halus, dan elegan, seperti seorang penari yang bergerak lembut dan berkelas. Gunakan sentuhan ringan dan halus, hindari nada keras atau tajam. Musik harus mengalir dengan cantik.",
+    image: "",
+    video: ""
   },
   "'8'": {
-    short: ""
+    short: "8 atau 8v (8va) adalah singkatan dari istilah musik 'ottava' yang artinya 'oktaf' dalam bahasa Italia.",
+    long: "8 atau 8v (8va) digunakan untuk menunjukkan bahwa not harus dimainkan satu oktaf lebih tinggi atau lebih rendah dari posisi yang tertulis di partitur. Ini digunakan supaya penulisan not tidak terlalu banyak garis bantu di atas atau di bawah paranada (staff). Jika ditulis '8va' (ottava alta), letaknya di atas not atau di atas paranada, artinya mainkan satu oktaf lebih tinggi. Jika ditulis '8vb' (ottava bassa), letaknya di bawah not atau di bawah paranada, artinya mainkan satu oktaf lebih rendah.",
+    image: "",
+    video: ""
   },
   "fine": {
-    short: ""
+    short: "Fine dibaca fi-ne, adalah istilah musik dari bahasa Italia yang berarti 'akhir' atau 'selesai'.",
+    long: "Apabila ada 'fine' di partitur artinya bagian itu merupakan tempat dimana lagu harus berakhir, meskipun notasi masih berlanjut setelahnya. Biasanya 'fine' dipakai bersama tanda pengulangan seperti: d.c. al Fine = kembali ke awal lagu dan berhenti ketika sampai pada kata 'Fine'.",
+    image: "",
+    video: ""
   },
   "'d.c.'": {
-    short: ""
+    short: "'d.c.' adalah singkatan dari istilah musik 'da Capo' yang artinya 'dari awal' atau 'dari kepala'.",
+    long: "'d.c.' digunakan untuk memberi tahu pemain agar mengulang lagu dari awal. Biasanya dikombinasikan dengan tanda lain seperti 'Fine' atau 'Coda' untuk menunjukkan di mana lagu harus diakhiri.",
+    image: "",
+    video: ""
   },
   "dot": {
     short: "Dot (titik) dalam musik adalah tanda kecil berbentuk titik yang ditempatkan di sebelah kanan not atau tanda diam (rest).",
     long: "Dot (titik) berfungsi untuk menambah durasi atau panjang waktu nada. Nilai dot adalah setengah dari not tempat dot diletakan. Jika dot diletakan di sebelah kanan not minim, artinya dot itu bernilai 1 (satu) ketuk, karena not minim bernilai 2 ketuk, jadi nilai ketuk keseluruhan adalah 3 ketuk (minim = 2 + dot = 1; 2 + 1 = 3)",
-    image: "",
+    image: "img/dot.jpg",
     video: "https://www.youtube.com/embed/OrgmL_2reFc"
   },
   "tie": {
     short: "'tie' dalam musik artinya garis lengkung yang menghubungkan dua atau lebih not dengan nada yang sama.",
     long: "'tie' berfungsi untuk memperpanjang durasi dari not tersebut. Jika ada dua crotchet yang dihubungkan dengan 'tie', maka totalnya menjadi 2 ketuk. Jadinya pemain menahan nada selama 2 ketuk penuh, bukn memainkannya 2 (dua) kali.",
-    image: "",
+    image: "img/tie.jpg",
     video: "https://www.youtube.com/embed/OrgmL_2reFc"
   }
 };
@@ -343,7 +414,7 @@ function appendMessage(sender, text) {
   div.classList.add(sender);
   div.innerHTML = text;
   chatBox.appendChild(div);
-  chatBox.scrollTop = chatBox.scrollHeight;
+  setTimeout(() => {chatBox.scrollTop = chatBox.scrollHeight;}, 100);
 }
 
 function sendMessage() {

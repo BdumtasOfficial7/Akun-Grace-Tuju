@@ -212,7 +212,7 @@ const topics = {
     image: "img/tanda_dinamika_forte_f.jpg",
     video: "https://www.youtube.com/embed/bY-GXTxNa4o"
   },
-  "'cresc.'": {
+  "'cresc'": {
     short: "'cresc.' adalah singkatan dari bahasa Italia 'crescendo' yang artinya 'semakin keras'.",
     long: "Dalam notasi musik, cresc. berfungsi untuk membuat musik dari lembut (piano) ke keras (forte). Artinya, apabila ada tanda 'cresc.' di partitur, bagian itu harus dimainkan mulai dari suara lembut, lalu perlahan-lahan menambah kekuatan atau tekanan sampai mencapai volume yang lebih kelas.\n\nSimbol lain dari 'cresc.' adalah simbol '<'.",
     image: "img/tanda_dinamika_crescendo_cresc.jpg",
@@ -257,7 +257,7 @@ const topics = {
   "'dim.'": {
     short: "'dim.' adalah singkatan dari diminuendo yang berarti perlahan-lahan menjadi lebih lembut.",
     long: "Istilah ini termasuk dalam tanda dinamika, yaitu tanda yang menunjukkan perubahan volume atau kekuatan suara dalam musik. Apabila ada tanda ini di partitur, maka pemain harus secara bertahap menurunkan volume suara, semakin lama semakin pelan atau semakin lembut.",
-    image: "",
+    image: "img/dim.jpg",
     vide: ""
   },
   "diminuendo": {
@@ -269,7 +269,7 @@ const topics = {
   "'dimin.'": {
     short: "'dimin.' adalah singkatan dari diminishing atau lebih tepatnya dari istilah Italia 'diminuendo' atau 'dim.', yang artinya perlahan-lahan menjadi lebih lembut.",
     long: "Istilah ini termasuk dalam tanda dinamika, yaitu tanda yang menunjukkan perubahan volume atau kekuatan suara dalam musik. Apabila ada tanda ini di partitur, maka pemain harus secara bertahap menurunkan volume suara, semakin lama semakin pelan atau semakin lembut.",
-    image: "",
+    image: "img/dimin.jpg",
     video: ""
   },
   "'e'": {
@@ -317,7 +317,7 @@ const topics = {
   "leggiero": {
     short: "Leggiero adalah istilah musik dari bahasa Italia yang berarti 'ringan' atau 'lembut'.",
     long: "Apabila ada istilah 'leggiero' di partitur maka pemain harus memainkan nada dengan ringan, halus, dan lepas. Musik harus terdengar mengalir, tidak berat, dan lentur. Nada dimainkan tidak keras, tidak ditekan, dan sedikit melayang di antara nada-nada lain.",
-    image: "",
+    image: "img/leggiero.jpg",
     video: ""
   },
   "dim. e poco rall.": {
@@ -365,7 +365,7 @@ const topics = {
   "grazioso": {
     short: "Grazioso adalah istilah musik dari bahasa Italia yang berarti 'anggun', 'lembut', atau 'menawan'.",
     long: "Grazioso berasal dari kata 'grazia' yang artinya 'keanggunan' atau 'keelokan'. Ini merupakan salah satu ekspresi musik. Apabila ada 'grazioso' di partitur, artinya pemain harus memainkan bagian itu dengan gaya yang anggun, halus, dan elegan, seperti seorang penari yang bergerak lembut dan berkelas. Gunakan sentuhan ringan dan halus, hindari nada keras atau tajam. Musik harus mengalir dengan cantik.",
-    image: "",
+    image: "img/grazioso.jpg",
     video: ""
   },
   "'8'": {
@@ -398,9 +398,9 @@ const topics = {
     image: "img/tie.jpg",
     video: "https://www.youtube.com/embed/OrgmL_2reFc"
   },
-  
+
   // ==== Lagu Untuk Latihan ====
-  "belajar lagu o holy night": {
+  "latihan o holy night": {
     video: "https://www.youtube.com/embed/CztuknpdqMU"
   },
   "lagu o holy night": {
@@ -534,7 +534,7 @@ function processInput(input) {
     for (let key in topics) {
       if (input.includes(key)) return showImage(key);
     }
-    appendMessage("bot", "Maaf, saya tidak menemukan topik itu.");
+    appendMessage("bot", "Maaf, saya tidak menemukan topik itu. Apabila itu adalah singkatan atau simbol kamu bisa menambahkan kutip dua (' ') agar saya bisa mengerti.");
     return;
   }
 
@@ -542,7 +542,7 @@ function processInput(input) {
     for (let key in topics) {
       if (input.includes(key)) return showVideo(key);
     }
-    appendMessage("bot", "Maaf, saya tidak menemukan topik itu.");
+    appendMessage("bot", "Maaf, saya tidak menemukan topik itu. Apabila itu adalah singkatan atau simbol kamu bisa menambahkan kutip dua (' ') agar saya bisa mengerti.");
     return;
   }
 
@@ -552,10 +552,11 @@ function processInput(input) {
   }
 
   // "apa itu..." / "apa yang dimaksud dengan..."
-  if (input.startsWith("apa itu") || input.startsWith("apa yang dimaksud")) {
+  if (input.startsWith("apa itu") || input.startsWith("apa yang dimaksud") || input.startsWith("apa arti")) {
   // Ambil kata setelah "apa itu" atau "apa yang dimaksud dengan"
   let topicWord = input.replace("apa itu", "")
                        .replace("apa yang dimaksud dengan", "")
+                       .replace("apa arti", "")
                        .trim();
 
   // Hilangkan tanda baca jika ada

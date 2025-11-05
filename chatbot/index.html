@@ -104,6 +104,7 @@ appendMessage("bot", "Halo! Saya adalah asisten pembelajaran Anda. Ketik 'apa ya
 
 // ======== Basis Pengetahuan Sederhana ========
 const topics = {
+  
   "gitar": {
     short: "Gitar adalah alat musik berdawai yang dimainkan dengan cara dipetik.",
     long: "Gitar terdiri dari beberapa bagian utama seperti body, neck, fretboard, senar, dan bridge. Gitar dapat akustik atau elektrik dan digunakan di berbagai genre musik.",
@@ -164,6 +165,18 @@ const topics = {
     image: "img/semiquaver.png",
     video: "https://www.youtube.com/embed/I5frtDJzgss"
   },
+  "c major scale": {
+    short: "",
+    long: "",
+    image: ""
+  },
+  "tangga nada c": {
+    short: "",
+    long: "",
+    image: ""
+  },
+
+  //Istilah-istilah Musik
   "allegro": {
     short: "Allegro dalam bahasa Italia berarti 'gembira' atau 'riang', merupakan istilah musik yang menunjukkan tempo cepat dan ceria.",
     long: "Ketika ada allegro di partitur, artinya bagian itu harus dimainkan dengan energik, dan penuh semangat. Tempo yang digunakan sekitar 120 - 160 beat per minute (bpm).",
@@ -175,6 +188,12 @@ const topics = {
     long: "Moderato menunjukkan bahwa musik harus dimainkan dengan tempo sedang, tidak terlalu cepat dan tidak terlalu lambat. Temponya sekitar 108-120 beat per minute (bpm). Musik dengan 'moderato' biasanya terasa stabil, nyaman, dan tidak tergesa-gesa.",
     image: "img/moderato.jpg",
     video: "https://www.youtube.com/embed/xABePGOK_Ag"
+  },
+  "andantino": {
+    short: "Andantino adalah istilah musik dari bahasa Italia yang berarti 'berjalan' atau 'tempo sedang'.",
+    long: "Andantino sedikit lebih cepat dari Andante. Seperti langkah ringan dan anggun. Namun, dalam beberapa karya lama, Andantino kadang diartikan sedikit lebih lambat dari Andante, tergantung gaya komponisnya, terutama karya klasik awal. Temponya sekitar 80-112 bpm. Kecepatannya antara Andante dan Moderato.",
+    image: "",
+    video: ""
   },
   "'p'": {
     short: "'p' adalah singkatan dari 'piano' dalam dinamika musik, yang artinya 'lembut' atau 'pelan'.",
@@ -258,7 +277,7 @@ const topics = {
     short: "'dim.' adalah singkatan dari diminuendo yang berarti perlahan-lahan menjadi lebih lembut.",
     long: "Istilah ini termasuk dalam tanda dinamika, yaitu tanda yang menunjukkan perubahan volume atau kekuatan suara dalam musik. Apabila ada tanda ini di partitur, maka pemain harus secara bertahap menurunkan volume suara, semakin lama semakin pelan atau semakin lembut.",
     image: "img/dim.jpg",
-    vide: ""
+    video: ""
   },
   "diminuendo": {
     short: "Diminuendo atau biasanya disingkat 'dim.' berarti perlahan-lahan menjadi lebih lembut.",
@@ -398,6 +417,30 @@ const topics = {
     image: "img/tie.jpg",
     video: "https://www.youtube.com/embed/OrgmL_2reFc"
   },
+  "ma non troppo": {
+    short: "Ma non troppo adalah istilah musik dari bahasa Italia yang berarti 'tetapi tidak terlalu'.",
+    long: "Istilah ini menghaluskan atau membatasi arti dari tanda tempo atau ekspresi lain yang ada di depannya. Artinya: ikuti instruksi utama, tapi jangan berlebihan. Contoh penggunaannya: Allegro ma non troppo => cepat tetapi tidak terlalu cepat. Tujuannya agar permainan musik terasa seimbang dan alami, bukan berlebihan dalam tempo atau emosi.",
+    image: "",
+    video: ""
+  },
+  "ma": {
+    short: "Ma adalah kata dari bahasa Italia yang berarti 'tetapi'.",
+    long: "Dalam musik, istilah 'ma' digunakan untuk menghubungkan dua kata atau frasa, dan memberi kontras atau pembatasan makna. Biasanya diikuti oleh kata lain seperti 'non troppo', 'grazioso', atau 'cantabile'.",
+    image: "",
+    video: ""
+  },
+  "non": {
+    short: "Non adalah kata yang berasal dari bahasa Italia yang berarti 'tidak'.",
+    long: "Dalam musik, 'non' digunakan untuk meniadakan atau membatasi makna dari kata yang mengikutinya. Jadi, jika ada kata 'non', itu berarti 'jangan terlalu' atau 'tidak dengan cara itu'. 'non' biasanya berdiri di depan kata sifat atau keterangan musik seperti 'troppo', 'legato', 'tanto'.",
+    image: "",
+    video: ""
+  },
+  "troppo": {
+    short: "Troppo adalah kata dari bahasa Italia yang artinya 'terlalu', 'too much' (dalam bahasa Ingris).",
+    long: "Troppo digunakan untuk menunjukkan batas atau larangan agar tidak berlebihan dalam tempo, dinamika, atau ekspresi. Biasanya muncul setelah kata 'non' atau 'ma non', yang artinya 'tidak terlalu'. Troppo hampir selalu dipakai untuk mengatur keseimbangan dalam musik, agar tempo atau ekspresi tidak ekstrem. Komposer ingin pemain menahan diri, tidak bermain terlalu cepat, keras, atau lambat.",
+    image: "",
+    video: ""
+  },
 
   // ==== Lagu Untuk Latihan ====
   "latihan lagu o holy night": {
@@ -405,6 +448,12 @@ const topics = {
   },
   "lagu o holy night": {
     video: "https://www.youtube.com/embed/QXmxpGbuI0Q"
+  },
+  "lagu betapa hatiku": {
+    video: "https://www.youtube.com/embed/hJ-FQUXn1EQ"
+  },
+  "latihan lagu betapa hatiku": {
+    video: ""
   }
 };
 
@@ -502,14 +551,14 @@ function processInput(input) {
         <li>Menampilkan gambar atau video pembelajaran(misal: "tampilkan gambar/video tentang gitar"</li>
         <li>Membantu menyetem gitar (ketik: "tolong bantu saya menyetem gitar"; "stop tuner" untuk berhenti)</li>
         <li>Memainkan nada (ketik: "saya ingin dengar nada C")</li>
-        <li>Menampilkan video lagu (ketik: "tampilkan video lagu o holy night")</li>
-        <li>Menampilkan video untuk belajar lagu (ketik: "tampilkan video belajar lagu o holy night")</li>
+        <li>Menampilkan video lagu (ketik: "tampilkan video lagu o holy night (lagu pilihan)")</li>
+        <li>Menampilkan video untuk latihan lagu (ketik: "tampilkan video latihan lagu o holy night (lagu pilihan)")</li>
       </ul>
 
       Catatan:
       <ul>
-        <li>Jika kata yang Anda cari berupa singkatan, maka anda harus memasukkan kata itu dalam tanda kutip satu (''). Misalnya cresc. (crescendo) menjadi 'cresc.'. Contohnya: "apa itu 'cresc.'?".</li>
-        <li>Jika kata yang anda cari berupa simbol, maka anda juga harus memasukkan kata itu ke dalam tanda kutip satu (''). Misalnya p (piano) menjadi 'p', atau f (forte) menjadi 'f'. Contohnya: "apa itu 'p'?".</li>
+        <li>Jika kata yang Anda cari berupa singkatan, maka anda harus memasukkan kata itu dalam tanda kutip satu (' '). Misalnya cresc. (crescendo) menjadi 'cresc.'. Contohnya: "apa itu 'cresc.'?".</li>
+        <li>Jika kata yang anda cari berupa simbol, maka anda juga harus memasukkan kata itu ke dalam tanda kutip satu (' '). Misalnya p (piano) menjadi 'p', atau f (forte) menjadi 'f'. Contohnya: "apa itu 'p'?".</li>
         <li>Semakin tinggi level Anda semakin banyak pertanyaan yang bisa saya jawab.
       </ul>
       Silakan tanyakan topik apa pun!

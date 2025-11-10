@@ -141,6 +141,13 @@ const fretboard = document.getElementById("fretboard");
       { string: 5, fret: 3, finger: 1 },
       { string: 4, fret: 5, finger: 3 },
     ],
+    Ckres: [
+      { string: 5, fret: 4, finger: 1 },
+      { string: 4, fret: 6, finger: 2 },
+      { string: 3, fret: 6, finger: 3 },
+      { string: 2, fret: 6, finger: 4 },
+      { string: 1, fret: 4, finger: 1 },
+    ],
     Ckresm: [
       { string: 5, fret: 4, finger: 1 },
       { string: 4, fret: 6, finger: 3 },
@@ -169,6 +176,11 @@ const fretboard = document.getElementById("fretboard");
       { string: 2, fret: 4, finger: 1 },
       { string: 1, fret: 4, finger: 1 },
     ],
+    GdomT: [
+      { string: 6, fret: 3, finger: 3 },
+      { string: 5, fret: 2, finger: 2 },
+      { string: 1, fret: 1, finger: 1 },
+    ],
     D: [
       { string: 1, fret: 2, finger: 2 },
       { string: 2, fret: 3, finger: 3 },
@@ -183,6 +195,11 @@ const fretboard = document.getElementById("fretboard");
       { string: 1, fret: 1, finger: 1 },
       { string: 3, fret: 2, finger: 2 },
       { string: 2, fret: 3, finger: 3 },
+    ],
+    DdomT: [
+      { string: 2, fret: 1, finger: 1 },
+      { string: 3, fret: 2, finger: 2 },
+      { string: 1, fret: 2, finger: 3 },
     ],
     A: [
       { string: 2, fret: 2, finger: 3 },
@@ -201,6 +218,10 @@ const fretboard = document.getElementById("fretboard");
       { string: 2, fret: 3, finger: 4 },
       { string: 1, fret: 1, finger: 1 },
     ],
+    AdomT: [
+      { string: 4, fret: 2, finger: 1 },
+      { string: 2, fret: 2, finger: 3 },
+    ],
     E: [
       { string: 3, fret: 1, finger: 1 },
       { string: 4, fret: 2, finger: 3 },
@@ -208,6 +229,10 @@ const fretboard = document.getElementById("fretboard");
     ],
     Em: [
       { string: 4, fret: 2, finger: 3 },
+      { string: 5, fret: 2, finger: 2 },
+    ],
+    EdomT: [
+      { string: 3, fret: 1, finger: 1 },
       { string: 5, fret: 2, finger: 2 },
     ],
     F: [
@@ -232,6 +257,14 @@ const fretboard = document.getElementById("fretboard");
       { string: 2, fret: 2, finger: 1 },
       { string: 1, fret: 2, finger: 1 },
     ],
+    FdomT: [
+      { string: 1, fret: 1, finger: 1 },
+      { string: 2, fret: 1, finger: 1 },
+      { string: 3, fret: 2, finger: 2 },
+      { string: 4, fret: 1, finger: 1 },
+      { string: 5, fret: 3, finger: 3 },
+      { string: 6, fret: 1, finger: 1 },
+    ],
     B: [
       { string: 1, fret: 2, finger: 1 },
       { string: 5, fret: 2, finger: 1 },
@@ -245,6 +278,13 @@ const fretboard = document.getElementById("fretboard");
       { string: 2, fret: 3, finger: 2 },
       { string: 4, fret: 4, finger: 3 },
       { string: 3, fret: 4, finger: 4 },
+    ],
+    BdomT: [
+      { string: 1, fret: 2, finger: 1 },
+      { string: 2, fret: 4, finger: 4 },
+      { string: 3, fret: 2, finger: 1 },
+      { string: 4, fret: 4, finger: 3 },
+      { string: 5, fret: 2, finger: 1 },
     ]
   };
 

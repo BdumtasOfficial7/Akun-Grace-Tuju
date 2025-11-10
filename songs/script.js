@@ -23,7 +23,7 @@ hatiku per-ca-ya
    F       C   G  C
 s'lalu ku per-ca-ya`,
 
-      oholynight: `Mariah Carey - O Holy Night
+      o_holy_night_mariah_carey: `Mariah Carey - O Holy Night
 [Intro]
 C C C C (arpeggio)
 
@@ -58,81 +58,87 @@ O night divine, o night when Christ was born
    G 2x    C F     C G              C
 O night divine, o night, o night divine`,
 
-      tanpa: `Tiara Andini - Tanpa Cinta
-[Intro]
-C G Am F
+      o_holy_night_morissette_amon: `Morissete Amon - O Holy Night
+[intro]
+G G G G (arpeggio)
 
-[Verse]
-C                  F
-Aku mencitaimu tanpa syarat
-C                     F
-Aku rela menunggu sangat lama
-Dm                 A
-Katamu suatu saat aku pasti
-     F             G
-Jadi cintamu satu cintamu
+[verse]
+G       G
+O Holy Night
+      C                 G   G
+The stars are brightly shining
+          G             D              G
+It is the night of our dear Saviour's birth
+G             G        C             G  G
+Long lay the world in sin and error pining
+            Bm            Am            Em
+'Til He appeared and the soul felt its worth
+
+[Bridge]
+     D       D        G             G
+A thrill of hope the weary world rejoices
+     D       D       G                G
+For yonder breaks a new and glorious morn
+
+[Refrain]
+Em             Bm   
+Fall on your knees
+
+   Am 2x             Em
+O hear the angels' voices
+
+   G D     G C     G D                   G
+O night divine, o night when Christ was born
+
+   D       G C     G D              G
+O night divine, o night, o night divine`,
+
+      draw_me_close_to_you: `Draw Me Close To You
+[Intro]
+Am Dsus G D7
+
+[Verse 1]
+G                 C
+ Draw me close to you
+Dsus              G
+    Never let me go
+Em                     C
+  I lay it all down again
+Dsus                       Em
+    To hear you say that I'm your friend
+
+[Verse 2]
+G G7            C
+  You are my desire
+Dsus                  G
+    No one else will do
+Em                           C
+  'Cause nothing else could take your place
+Dsus                        Em
+    To feel the warmth of your embrace
+
+G                  Am
+ Help me find the way,
+D7              G    Dsus  D7
+Bring me back to you
+
 
 [Chorus]
-      C            E        Am
-Aku ingin kau menerima seluruh hatiku
-      Dm               C           G
-Aku ingin kau mengerti di jiwaku hanya kamu
-        C            E        Am
-Namun bila kau tak bisa menerima aku
-        F           G         C
-Lebih baik ku hidup tanpa cinta` ,
-
-      bintang: `Nidji - Laskar Pelangi
-[Intro]
-G C G C
-
-[Verse]
-G         C
-Mimpi adalah kunci
-    Em           D
-Untuk kita menaklukkan dunia
-G         C
-Berlarilah tanpa lelah
-     Em             D
-Sampai engkau meraihnya
-
-[Chorus]
-C       D
-Laskar pelangi
-G         Em
-Takkan terikat waktu
-C       D
-Bebaskan mimpimu
-G          Em
-Di angkasa...`,
-
-      sampai: `Sheila On 7 - Dan
-[Intro]
-C G Am F
-
-[Verse]
-C      G         Am
-Dan... bila esok datang kembali
-       F         G       C
-Seperti sedia kala di dalam pelukmu
-       G         Am
-Mungkin takkan pernah ku temui
-     F        G
-Cinta seperti ini
-
-[Chorus]
-F        G
-Sampai kapan kau akan
-    C          Am
-Terus menyiksa hatiku
-F        G       C
-Takkan ku lepas dirimu`
+G         D     C
+You're all I want
+G          D    C     Dsus 
+ You're all I ever needed
+G          D     C
+ You're all I want
+Am              D         G
+  Help me know you are near`,
     };
 
     const fileMap = {
-      satu: "satu.pdf",
-      bintang: "nidji-laskar-pelangi.pdf",
-      sampai: "sheila-dan.pdf"
+      hatikupercaya: "",
+      o_holy_night_mariah_carey: "",
+      o_holy_night_morissette_amon: "",
+      draw_me_close_to_you: ""
     };
 
     function selectSong() {

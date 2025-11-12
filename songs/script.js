@@ -132,13 +132,58 @@ G          D     C
  You're all I want
 Am              D         G
   Help me know you are near`,
+
+    lingkupiku: `Jacqlien Celosse - Lingkupiku
+[intro]
+  
+
+[verse 1]
+Lingkupiku
+Dengan sayap-Mu
+Naungiku
+Dalam kuasa-Mu
+
+[chorus]
+Di saat badai bergelora
+Ku akan terbang bersama-Mu
+Bapa Kau Raja atas s'mesta
+Ku tenang s'bab Kau Allahku
+
+[verse 2]
+Jiwaku tenang
+Dalam Kristus
+Lihat kuasa-Nya
+Dalam keheningan`,
+
+    betapa_hatiku: `Nikita - Betapa Hatiku
+[intro]
+
+[verse 1]
+Betapa hatiku
+berterima kasih Yesus
+Kau mengasihiku
+Kau memilikiku
+
+[chorus]
+Hanya ini Tuhan persembahanku
+Segenap hidupku jiwa dan ragaku
+S'bab tak kumiliki harta kekayaan
+Yang cukup berarti
+tuk kupersembahkan
+
+Hanya ini Tuhan permohonanku
+Terimalah Tuhan persembahanku
+Pakailah hidupku sebagai alatMu
+seumur hidupku`
     };
 
     const fileMap = {
       hatikupercaya: "",
       o_holy_night_mariah_carey: "",
       o_holy_night_morissette_amon: "",
-      draw_me_close_to_you: ""
+      draw_me_close_to_you: "",
+      lingkupiku: "",
+      betapa_hatiku: ""
     };
 
     function selectSong() {

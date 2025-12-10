@@ -135,45 +135,71 @@ Am              D         G
 
     lingkupiku: `Jacqlien Celosse - Lingkupiku
 [intro]
-  
+Melodi: E F G C(F) E D(G) C C(Akor C 4x) (Akor G 4x)
 
 [verse 1]
+C    G   Am  Em
 Lingkupiku
+    Dm  D     G  G7
 Dengan sayap-Mu
+C G   Am  Em
 Naungiku
+   Dm  D     G
 Dalam kuasa-Mu
 
 [chorus]
+G7         F      G   C
 Di saat badai bergelora
+C7          F       E    Am
 Ku akan terbang bersama-Mu
+G7          F    G       C
 Bapa Kau Raja atas s'mesta
+Am            Dm     G    C  G7
 Ku tenang s'bab Kau Allahku
 
 [verse 2]
+   C Em   Am  G
 Jiwaku tenang
+   Dm   D  G  G7
 Dalam Kristus
+   C   Em     Am  G
 Lihat kuasa-Nya
+   Dm    D    G
 Dalam keheningan`,
 
     betapa_hatiku: `Nikita - Betapa Hatiku
 [intro]
+G A A7 D A7 D D7
 
 [verse 1]
+            Em
 Betapa hatiku
-berterima kasih Yesus
+A             D     D
+ berterima kasih Yesus
+              Em
 Kau mengasihiku
-Kau memilikiku
+A             D
+ Kau memilikiku
 
 [chorus]
+             G              A
 Hanya ini Tuhan persembahanku
+             F#m              Bm
 Segenap hidupku jiwa dan ragaku
+                Em             A
 S'bab tak kumiliki harta kekayaan
+      A7         D
 Yang cukup berarti
+     D          D7
 tuk kupersembahkan
 
+             G             A
 Hanya ini Tuhan permohonanku
+             F#m           Bm
 Terimalah Tuhan persembahanku
+              Em              A
 Pakailah hidupku sebagai alatMu
+  A7         D
 seumur hidupku`
     };
 

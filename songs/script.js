@@ -1,4 +1,44 @@
 const lyrics = {
+      kasihsetiamu: `Tabita Sipahutar - Kasih Setia-Mu
+[Intro]
+F G Am F C G C
+
+[Verse 1]
+G           D         
+ Disaat ku berjalan
+Em           Bm
+ di dalam kegelapan
+C             Bm
+ Kau menuntun jalanku
+   Am          D
+Yesus Engkau baik
+
+[Verse 2]
+G               D
+ Engkau yang menopang ku
+Em          Bm
+ disaat ku terjatuh
+C            Bm
+ ke dalam dosa dunia
+     Am        D
+Kau mengampuniku
+
+[Chorus]
+           G
+Tri-ma-ka-sih
+B           Em      D     C
+ buat kasih se-tia Mu Yesus
+           Am
+Kau tak memandang ku
+D               G
+ yang penuh dengan dosa
+D           G
+ Engkau mengampuni
+B          Em  D    C
+ dengan kasih mu Yesus
+        Am       D            G  
+betapa dahsyatnya Engkau bagiku`,
+
       hatikupercaya: `Edward Chen - Hatiku Percaya
 [Intro]
 F G Am F C G C

@@ -1,265 +1,1058 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profil Siswa Petik Ceria</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Fredoka', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #FADADD, #A0D8EF);
-      color: #333;
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Bdumtas Piano Course</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    background:
+    linear-gradient(
+    135deg,
+    #140021,
+    #220033,
+    #0f0018);
+
+    color:white;
+    min-height:100vh;
+}
+
+/* ======================= */
+/* OVERLAY */
+/* ======================= */
+
+#overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.7);
+
+    z-index:90;
+    display:none;
+}
+
+#overlay.active{
+    display:block;
+}
+
+/* ======================= */
+/* SIDEBAR */
+/* ======================= */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:280px;
+    height:100%;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    backdrop-filter:blur(20px);
+
+    border-right:
+    1px solid rgba(255,255,255,0.08);
+
+    padding:20px;
+
+    z-index:100;
+
+    overflow-y:auto;
+}
+
+.logo{
+    text-align:center;
+    font-size:32px;
+    font-weight:700;
+
+    color:#ff4fd8;
+
+    margin-bottom:30px;
+
+    text-shadow:
+    0 0 10px #ff4fd8;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.menu button{
+    border:none;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:
+    rgba(255,255,255,0.06);
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.menu button:hover{
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff4fd8,
+    #9333ea);
+
+    transform:translateX(5px);
+}
+
+.menu button.active{
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff4fd8,
+    #9333ea);
+
+}
+
+/* ======================= */
+/* MAIN */
+/* ======================= */
+
+.main{
+    margin-left:300px;
+    width:calc(100% - 300px);
+    padding:25px;
+}
+
+/* ======================= */
+/* TOPBAR */
+/* ======================= */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-bottom:25px;
+}
+
+.title{
+    font-size:38px;
+    font-weight:700;
+
+    background:
+    linear-gradient(
+    to right,
+    #ff4fd8,
+    #9333ea,
+    #f59e0b);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.level-box{
+
+    background:
+    rgba(255,255,255,0.06);
+
+    padding:15px 20px;
+
+    border-radius:20px;
+
+    border:
+    1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 0 20px rgba(255,79,216,0.2);
+}
+
+/* ======================= */
+/* PAGE */
+/* ======================= */
+
+.page{
+    display:none;
+    animation:fade 0.3s ease;
+}
+
+.active-page{
+    display:block;
+}
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
     }
 
-    .container {
-      max-width: 800px;
-      margin: 50px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
 
-    h1, h2 {
-      text-align: center;
-      color: #BFA2DB;
+}
+
+/* ======================= */
+/* PROFILE */
+/* ======================= */
+
+.profile-card{
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    display:flex;
+    align-items:center;
+    gap:25px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:25px;
+
+    box-shadow:
+    0 0 30px rgba(255,79,216,0.1);
+}
+
+.profile-img{
+    width:130px;
+    height:130px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid #ff4fd8;
+
+    box-shadow:
+    0 0 20px #ff4fd8;
+}
+
+.profile-info h2{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.exp-bar{
+    width:300px;
+    height:18px;
+
+    background:#1e293b;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-top:10px;
+}
+
+.exp-fill{
+    width:74%;
+    height:100%;
+
+    background:
+    linear-gradient(
+    to right,
+    #ff4fd8,
+    #9333ea,
+    #f59e0b);
+}
+
+/* ======================= */
+/* GRID */
+/* ======================= */
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:20px;
+}
+
+/* ======================= */
+/* CARD */
+/* ======================= */
+
+.card,
+.stat-card{
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    border-radius:22px;
+
+    padding:22px;
+
+    box-shadow:
+    0 0 25px rgba(255,79,216,0.08);
+}
+
+.card{
+    margin-bottom:20px;
+}
+
+.card h2{
+    margin-bottom:18px;
+
+    color:#ff4fd8;
+}
+
+/* ======================= */
+/* STATS */
+/* ======================= */
+
+.progress{
+    width:100%;
+    height:15px;
+
+    background:#1e293b;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:10px 0;
+}
+
+.progress div{
+    height:100%;
+}
+
+/* intelegent */
+.rhythm{
+    width:91%;
+    background:#ff4fd8;
+}
+
+/* agility */
+.technique{
+    width:70%;
+    background:#9333ea;
+}
+
+/* strenght */
+.creativity{
+    width:60%;
+    background:#f59e0b;
+}
+
+/* ======================= */
+/* LESSON */
+/* ======================= */
+
+.lesson,
+.setting,
+.player{
+    background:
+    rgba(255,255,255,0.05);
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:10px;
+}
+
+/* ======================= */
+/* BADGE */
+/* ======================= */
+
+.badge{
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff4fd8,
+    #9333ea,
+    #f59e0b);
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+}
+
+/* ======================= */
+/* TASK */
+/* ======================= */
+
+.task{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:10px;
+}
+
+.task button{
+    border:none;
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff4fd8,
+    #9333ea);
+
+    color:white;
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
+/* ======================= */
+/* QUIZ */
+/* ======================= */
+
+.quiz-option{
+    width:100%;
+
+    border:none;
+
+    padding:15px;
+
+    margin-top:10px;
+
+    border-radius:15px;
+
+    background:#1e293b;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.quiz-option:hover{
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff4fd8,
+    #9333ea);
+
+}
+
+/* ======================= */
+/* MEDIA */
+/* ======================= */
+
+iframe,
+video,
+audio{
+    width:100%;
+    max-width:100%;
+
+    border-radius:15px;
+
+    margin-top:10px;
+}
+
+/* ======================= */
+/* MENU TOGGLE */
+/* ======================= */
+
+.menu-toggle{
+    display:none;
+}
+
+/* ======================= */
+/* MOBILE */
+/* ======================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+        left:-100%;
+
+        width:85%;
+        max-width:320px;
+
+        transition:0.3s;
     }
 
-    .nav {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
+    .sidebar.active{
+        left:0;
     }
 
-    .nav button {
-      background: #FADADD;
-      border: none;
-      color: #5A3E70;
-      font-size: 16px;
-      font-weight: bold;
-      padding: 12px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:12px;
     }
 
-    .nav button:hover {
-      transform: scale(1.08);
-      background: #F8BBD0;
-      color: white;
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .profile-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      margin-bottom: 20px;
+    .title{
+        font-size:28px;
     }
 
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid #BFA2DB;
-      margin-bottom: 10px;
+    .menu-toggle{
+        display:block;
+
+        border:none;
+
+        background:
+        linear-gradient(
+        135deg,
+        #ff4fd8,
+        #9333ea);
+
+        color:white;
+
+        padding:10px 15px;
+
+        border-radius:10px;
+
+        margin-bottom:10px;
+
+        cursor:pointer;
     }
 
-    .info {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      font-size: 16px;
+    .profile-card{
+        flex-direction:column;
+        text-align:center;
     }
 
-    .level {
-      padding: 4px 10px;
-      background: #BFA2DB;
-      color: white;
-      border-radius: 12px;
-      font-size: 14px;
+    .profile-img{
+        width:110px;
+        height:110px;
     }
 
-    .stat {
-      margin: 15px 0;
+    .profile-info h2{
+        font-size:24px;
     }
 
-    .bar-bg {
-      background: #eee;
-      border-radius: 12px;
-      overflow: hidden;
-      height: 24px;
+    .exp-bar{
+        width:100%;
     }
 
-    .bar-fill {
-      height: 100%;
-      color: white;
-      padding-left: 10px;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
+    .grid{
+        grid-template-columns:1fr;
     }
 
-    .tasks {
-      margin-top: 30px;
+    .task{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .task {
-      background: #FFE3EC;
-      padding: 12px;
-      border-left: 5px solid #F8BBD0;
-      margin-bottom: 12px;
-      border-radius: 8px;
+    .task button{
+        width:100%;
     }
 
-    @media (max-width: 600px) {
-      .info {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav {
-        flex-direction: column;
-        gap: 10px;
-      }
+}
+
+/* ======================= */
+/* SMALL PHONE */
+/* ======================= */
+
+@media(max-width:480px){
+
+    .title{
+        font-size:24px;
     }
 
-    .hidden {
-      display: none;
+    .logo{
+        font-size:26px;
     }
-  </style>
+
+}
+
+</style>
 </head>
+
 <body>
 
-<div class="container">
-  <h1>Profil Siswa</h1>
+<div id="overlay"
+onclick="closeMenu()"></div>
 
-  <div class="nav">
-    <button onclick="showPage('profile')">Dashboard</button>
-    <button onclick="showPage('alur')">Alur Belajar</button>
-    <button onclick="showPage('tasks')">Tugas</button>
-    <button onclick="showPage('stats')">Statistik</button>
-    <button onclick="showPage('tools')">Tools</button>
-    <!-- <button onclick="alert('Sampai jumpa!')">Keluar</button> -->
-  </div>
+<!-- ======================= -->
+<!-- SIDEBAR -->
+<!-- ======================= -->
 
-  <!-- PROFIL -->
-  <div id="profile" class="page-section">
-    <div class="profile-header">
-      <img src="img.jpg" alt="Foto Siswa" class="profile-pic">
-      <h2 id="student-name">Grace Tuju</h2>
+<div class="sidebar"
+id="sidebar">
+
+    <div class="logo">
+        BDUMTAS GUITAR COURSE
     </div>
 
-    <div class="info"><strong>Usia:</strong> <span id="student-age">13 tahun</span></div>
-    <div class="info"><strong>Level:</strong> <span class="level" id="student-level">3 - Beginner</span></div>
-    <div class="info"><strong>Grade:</strong> <span class="level" id="student-level">B [85] - <a href="ppm_grace.pdf">Cek Detail</a></span></div>
-    <div class="info"><strong>Hari Belajar:</strong> <span class="level" id="student-level">Rabu</span></div>
-    <div class="info"><strong>Jam Belajar:</strong> <span class="level" id="student-level">16.30 WITA</span></div>
-  </div>
+    <div class="menu">
 
-  <div id="alur" class="page-section hidden">
-    <h2>Alur Belajar Gitar Pemula</h2>
-    <h3>Ikuti alur belajar di bawah ini supaya mendapat hasil yang memuaskan.</h3>
-    <div class="task">0. Ayo kenal alat musik Gitar: <a href="">klik di sini.</a></div>
-    <div class="task">1. Cari tahu tentang cara menyetem gitar (tunning): <a href="">klik di sini.</a></div>
-    <div class="task">2. Cari tahu tentang posisi memegang gitar: <a href="">klik di sini.</a></div>
-    <div class="task">3. Cari tahu tentang Partitur: <a href="">klik di sini.</a></div>
-    <div class="task">4. Cari tahu tentang Garis Paranada: <a href="">klik di sini.</a></div>
-    <div class="task">5. Cari tahu tentang Clef: <a href="">klik di sini.</a></div>
-    <div class="task">6. Cari tahu tentang Kromatik: <a href="">klik di sini.</a></div>
-    <div class="task">7. Cari tahu tentang Tanda Birama: <a href="">klik di sini.</a></div>
-    <div class="task">8. Cari tahu tentang Not Balok dan cara baca Not Balok: <a href="">klik di sini.</a></div>
-    <div class="task">9. Cari tahu tentang Interval Nada: <a href="">klik di sini.</a></div>
-    <div class="task">10. Cari tahu tentang Akor Dasar dan Progressi Akor: <a href="">klik di sini.</a></div>
-    <div class="task">11. Latihan senar 1: <a href="">klik di sini.</a></div>
-    <div class="task">12. Latihan senar 2: <a href="">klik di sini.</a></div>
-    <div class="task">13. Latihan senar 3: <a href="">klik di sini.</a></div>
-    <div class="task">14. Latihan senar 4: <a href="">klik di sini.</a></div>
-    <div class="task">15. Latihan senar 5: <a href="">klik di sini.</a></div>
-    <div class="task">16. Latihan senar 6: <a href="">klik di sini.</a></div>
-    <div class="task">17. Cari tahu tentang Tablature/TAB: <a href="">klik di sini.</a></div>
-    <div class="task">18. Cari tahu tentang Power Chord: <a href="">klik di sini.</a></div>
-    <div class="task">19. Latihan Power Chord: <a href="">klik di sini.</a></div>
-    <div class="task">20. Buat tugas 1 - 12 Gitar Pemula</div>
-    <!-- <h2>Alur Belajar Piano Intermediate</h2>
-    <div class="task">10. Cari tahu tentang Tempo: <a href="">klik di sini.</a></div>
-    <div class="task">11. Cari tahu tentang Skala dan Arpeggio dua oktaf: <a href="">klik di sini.</a></div>
-    <div class="task">12. Cari tahu tentang Pola jari silang dan parallel motion: <a href="">klik di sini.</a></div>
-    <div class="task">13. Cari tahu tentang teknik Legato dan Staccato: <a href="">klik di sini.</a></div>
-    <div class="task">14. Cari tahu tentang Tanda Birama kompleks (6/8 || 9/8 || 12/8): <a href="">klik di sini.</a></div>
-    <div class="task">15. Cari tahu tentang Inversi dan Kadens: <a href="">klik di sini.</a></div>
-    <div class="task">16. Cari tahu tentang Akor 4 nada: <a href="">klik di sini.</a></div>
-    <div class="task">17. Cari tahu tentang Progressi Akor Lanjutan: <a href="">klik di sini.</a></div>
-    <div class="task">18. Cari tahu tentang Modulasi: <a href="">klik di sini.</a></div>
-    <div class="task">19. Cari tahu tentang Circle of Fifths: <a href="">klik di sini.</a></div>
-    <div class="task">20. Cari tahu tentang Tanda Dinamika dan Ekspresi: <a href="">klik di sini.</a></div>
-    <div class="task">21. Cari tahu tentang Rubato (Liszt, Chopin, Schumann): <a href="">klik di sini.</a></div>
-    <div class="task">22. Buat tugas 13 - 45 Piano Menengah: <a href="">klik di sini.</a></div> -->
-  </div>
+        <button class="menu-btn active"
+        onclick="showPage('dashboard',this)">
+            ⚙ Dashboard
+        </button>
 
-  <!-- TUGAS -->
-  <div id="tasks" class="page-section hidden">
-    <h2>Tugas dari Guru</h2>
-    <!-- <div class="task"><a href="tugas_notasi_sepuluh.pdf">Tugas 10 - Notasi Balok</a></div>
-    <div class="task"><a href="tugas_notasi_sebelas.pdf">Tugas 11 - Notasi Balok</a></div> -->
-    <div class="task"><a href="tugas12_ujian_akhir_beginner.pdf">Tugas 12 - Ujian Akhir Beginner</a></div>
-    <div class="task">Soundtrack Tugas 12 - <a href="soundtrack.html">klik di sini.</a></div>
-  </div>
+        <button class="menu-btn"
+        onclick="showPage('courses',this)">
+            🎼 Courses
+        </button>
 
-  <!-- STATISTIK -->
-  <div id="stats" class="page-section hidden">
-    <h2>Statistik Karakter</h2>
-    <div class="stat">
-      <label>Intelegent</label>
-      <div class="bar-bg"><div class="bar-fill" style="width: 91%; background: #BFA2DB;">  824/901</div></div>
-    </div>
-    <div class="stat">
-      <label>Strength</label>
-      <div class="bar-bg"><div class="bar-fill" style="width: 59%; background: #FADADD;">534/901</div></div>
-    </div>
-    <div class="stat">
-      <label>Agility</label>
-      <div class="bar-bg"><div class="bar-fill" style="width: 70%; background: #A0D8EF;">634/901</div></div>
-    </div>
-  </div>
+        <button class="menu-btn"
+        onclick="showPage('practice',this)">
+            🎸 Practice
+        </button>
 
-  <!-- Tools -->
-   <div id="tools" class="page-section hidden">
-    <label>Akor Gitar</label>
-    <div class="chord">
-      <a href="akor-gitar/chord.html">Play</a>
-    </div><br>
-    <label>Tunning Gitar</label>
-    <div class="tuner">
-      <a href="tuning/tuner.html">Play</a>
-    </div><br>
-    <label>Lagu-lagu</label>
-    <div class="songs">
-      <a href="songs/lirik.html">Play</a>
-    </div><br>
-    <label>ChatBot</label>
-    <div class="songs">
-      <a href="chatbot/index.html">Buka ChatBot</a>
+        <button class="menu-btn"
+        onclick="showPage('assignment',this)">
+            📝 Assignment
+        </button>
+
+        <button class="menu-btn"
+        onclick="showPage('achievement',this)">
+            🏆 Achievement
+        </button>
+
+        <button class="menu-btn"
+        onclick="showPage('leaderboard',this)">
+            🥇 Leaderboard
+        </button>
+
+        <!-- <button class="menu-btn"
+        onclick="showPage('media',this)">
+            🎬 Media
+        </button> -->
+
+        <button class="menu-btn"
+        onclick="showPage('settings',this)">
+            ⚙ Tools
+        </button>
+
     </div>
-   </div>
-   </div>
+
+</div>
+
+<!-- ======================= -->
+<!-- MAIN -->
+<!-- ======================= -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+
+            <button class="menu-toggle"
+            onclick="toggleMenu()">
+                ☰ Menu
+            </button>
+
+            <div class="title">
+                Bdumtas Guitar Course
+            </div>
+
+        </div>
+
+        <div class="level-box">
+            ⭐ Level 3
+        </div>
+
+    </div>
+
+    <!-- DASHBOARD -->
+
+    <div id="dashboard"
+    class="page active-page">
+
+        <div class="profile-card">
+
+            <img
+            src="img.jpg"
+            class="profile-img">
+
+            <div class="profile-info">
+
+                <h2>Grace Tuju</h2>
+
+                <p>Age: 13 Years Old</p>
+
+                <p>Guitar Beginner</p>
+
+                <div class="exp-bar">
+                    <div class="exp-fill"></div>
+                </div>
+
+                <p>EXP 664 / 901</p>
+
+            </div>
+
+        </div>
+
+        <div class="grid">
+
+            <div class="stat-card">
+
+                <h3>🎵 Intelegent</h3>
+
+                <div class="progress">
+                    <div class="rhythm"></div>
+                </div>
+
+                <p>91 Points</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>🎹 Agility</h3>
+
+                <div class="progress">
+                    <div class="technique"></div>
+                </div>
+
+                <p>70 Points</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>🎼 Strenght</h3>
+
+                <div class="progress">
+                    <div class="creativity"></div>
+                </div>
+
+                <p>60 Points</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- COURSES -->
+
+    <div id="courses"
+    class="page">
+
+        <div class="card">
+
+            <h2>🎼 Music Courses</h2>
+
+            <div class="lesson">✅ Partitur</div>
+            <div class="lesson">✅ Nilai Nada & Ketuk</div>
+            <div class="lesson">✅ Tempo: <a href="alur-belajar/TEMPO.pdf">klik di sini</a></div>
+            <div class="lesson">✅ String 1: <a href="alur-belajar/String 1.pdf">klik di sini</a></div>
+            <div class="lesson">✅ String 2: <a href="alur-belajar/String 2.pdf">klik di sini</a></div>
+            <div class="lesson">✅ String 3: <a href="alur-belajar/String 3.pdf">klik di sini</a></div>
+            <div class="lesson">✅ String 4</div>
+            <div class="lesson">✅ String 5: <a href="alur-belajar/String 5.pdf">klik di sini</a></div>
+            <div class="lesson">✅ String 6</div>
+            <div class="lesson">✅ Billy B Badd: <a href="alur-belajar/soundtrack.html">klik di sini</a></div>
+            <div class="lesson">🔒 Mainkan Lagu 2</div>
+
+        </div>
+
+    </div>
+
+    <!-- PRACTICE -->
+
+    <div id="practice"
+    class="page">
+
+        <div class="card">
+
+            <h2>🎸 Daily Practice</h2>
+            <p>Quiz segera akan di-update...</p>
+            <!-- <p>Screenshot hasil quiz dan kirim ke nomor penguji</p><br>
+            <div class="lesson"><p>Quiz 1: <a href="quiz/game_edukasi_satu/index.html">klik di sini</a></p></div>
+            <div class="lesson"><p>Quiz 2: <a href="quiz/game_edukasi_dua/index.html">klik di sini</a></p></div>
+            <div class="lesson"><p>Quiz 3: <a href="quiz/game_edukasi_tiga/index.html">klik di sini</a></p></div>
+            <div class="lesson"><p>Quiz 4: <a href="quiz/game_edukasi_empat/index.html">klik di sini</a></p></div> -->
+
+        </div>
+
+    </div>
+
+    <!-- ASSIGNMENT -->
+
+    <div id="assignment"
+    class="page">
+
+        <div class="card">
+
+            <h2>📝 Assignment</h2>
+
+            <div class="task">
+
+                <span>
+                    Piano PDF Exercise
+                </span>
+
+                <button>
+                    <a href="tugas/tugas12_ujian_akhir_beginner.pdf">Open</a>
+                </button>
+
+            </div>
+
+            <div class="task">
+
+                <span>
+                    Listening MP3
+                </span>
+
+                <button>
+                    <a href="alur-belajar/soundtrack.html">Open</a>
+                </button>
+
+            </div>
+
+            <div class="task">
+
+                <span>
+                    Video Tutorial
+                </span>
+
+                <button>
+                    Watch
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ACHIEVEMENT -->
+
+    <div id="achievement"
+    class="page">
+
+        <div class="card">
+
+            <h2>
+                🏆 Achievement
+            </h2>
+
+            <p>Rajin belajar akan mendapatkan Achievement Reward!</p>
+
+            <!-- <div class="badge">
+                🎹 Piano Hero
+            </div>
+
+            <div class="badge">
+                🎼 Music Reader
+            </div>
+
+            <div class="badge">
+                🔥 30 Days Practice
+            </div> -->
+
+        </div>
+
+    </div>
+
+    <!-- LEADERBOARD -->
+
+    <div id="leaderboard"
+    class="page">
+
+        <div class="card">
+
+            <h2>
+                🥇 Leaderboard
+            </h2>
+
+            <p>Segera di-update...</p>
+
+            <!-- <div class="player">
+                <span>Aldo</span>
+                <span>Level 8</span>
+            </div>
+
+            <div class="player">
+                <span>Kevin</span>
+                <span>Level 7</span>
+            </div>
+
+            <div class="player">
+                <span>Sarah</span>
+                <span>Level 6</span>
+            </div> -->
+
+        </div>
+
+    </div>
+
+    <!-- MEDIA -->
+
+    <div id="media"
+    class="page">
+
+        <div class="card">
+
+            <h2>
+                🎬 Video Lesson
+            </h2>
+
+            <video controls>
+
+                <source
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                type="video/mp4">
+
+            </video>
+
+        </div>
+
+        <div class="card">
+
+            <h2>
+                🎧 Audio Lesson
+            </h2>
+
+            <audio controls>
+
+                <source
+                src="https://www.w3schools.com/html/horse.mp3"
+                type="audio/mp3">
+
+            </audio>
+
+        </div>
+
+    </div>
+
+    <!-- SETTINGS -->
+
+    <div id="settings"
+    class="page">
+
+        <div class="card">
+
+            <h2>⚙ Tools</h2>
+
+            <div class="setting">👤 Chatbot: <a href="tools/chatbot/index.html">klik di sini</a></div>
+            <div class="setting">🌙 Songs: <a href="tools/songs/lirik.html">klik di sini</a></div>
+            <div class="setting">🔔 Tunner: <a href="tools/tuning/tuner.html">klik di sini</a></div>
+            <div class="setting">🎸 Akor: <a href="tools/akor-gitar/chord.html">klik di sini</a></div>
+
+        </div>
+
+    </div>
+
 </div>
 
 <script>
-  function showPage(pageId) {
-    const pages = document.querySelectorAll('.page-section');
-    pages.forEach(page => page.classList.add('hidden'));
-    document.getElementById(pageId).classList.remove('hidden');
-  }
+
+function toggleMenu(){
+
+    document
+    .getElementById("sidebar")
+    .classList.toggle("active");
+
+    document
+    .getElementById("overlay")
+    .classList.toggle("active");
+
+}
+
+function closeMenu(){
+
+    document
+    .getElementById("sidebar")
+    .classList.remove("active");
+
+    document
+    .getElementById("overlay")
+    .classList.remove("active");
+
+}
+
+function showPage(pageId,button){
+
+    const pages =
+    document.querySelectorAll('.page');
+
+    pages.forEach(page=>{
+
+        page.classList.remove('active-page');
+
+    });
+
+    document
+    .getElementById(pageId)
+    .classList.add('active-page');
+
+    const buttons =
+    document.querySelectorAll('.menu-btn');
+
+    buttons.forEach(btn=>{
+
+        btn.classList.remove('active');
+
+    });
+
+    button.classList.add('active');
+
+    closeMenu();
+
+}
+
 </script>
 
 </body>
